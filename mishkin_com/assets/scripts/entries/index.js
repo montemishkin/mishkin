@@ -4,9 +4,8 @@
 
 /* common react imports */
 import React from 'react/addons'
-import Router from 'react-router'
 /* local imports */
-import routes from '../routes'
+import Root from '../components/Root'
 
 
 // normalize css
@@ -15,12 +14,8 @@ import normalize from '../../styles/normalize'
 /* eslint-enable */
 
 
-// run the router
-Router.run(
-    routes,
-    Router.HistoryLocation,
-    (Handler) => React.render(<Handler />, document.body)
-)
+// render root component to body
+React.render(<Root />, document.body)
 
 
 // end of file
