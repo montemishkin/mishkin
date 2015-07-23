@@ -1,0 +1,19 @@
+# everything in the database directory
+db/*
+# except for the .gitme
+!db/.gitme
+
+# frontend dependencies
+node_modules
+
+# everything in the frontend build directory
+mishkin_com/assets/build
+
+# any compiled python directories
+__pycache__
+
+# thanks apple
+**/.DS_Store
+
+
+# end of file
