@@ -1,8 +1,8 @@
 # #
-# Upstart script for the mishkin.com gunicorn application server.
+# Upstart script for the mishkin_com gunicorn application server.
 # #
 
-description "Gunicorn application server for mishkin.com django project"
+description "Gunicorn application server for mishkin_com django project"
 
 start on [2345]
 stop on runlevel [!12345]
@@ -16,13 +16,13 @@ setuid mishkin_com
 setgid www-data
 
 # navigate to project directory
-chdir /home/mishkin_com/projects/mishkin.com
+chdir /home/mishkin_com/projects/mishkin_com
 
 # start server
-exec /home/mishkin_com/.virtualenvs/mishkin.com/bin/gunicorn \
-    --name mishkin.com \
+exec /home/mishkin_com/.virtualenvs/mishkin_com/bin/gunicorn \
+    --name mishkin_com \
     --workers 3 \
-    --bind unix:/home/mishkin_com/projects/mishkin.com/mishkin_com.sock \
+    --bind unix:/home/mishkin_com/projects/mishkin_com/mishkin_com.sock \
     config.wsgi:application
 
 

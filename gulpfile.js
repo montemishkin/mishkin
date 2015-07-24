@@ -34,15 +34,15 @@ var project_paths = require('./config/project_paths')
 /**
  * Remove all ouptut files from previous frontend builds.
  */
-gulp.task('f-clean', function(cb) {
+gulp.task('clean_previous_build', function(cb) {
     del(project_paths.build_dir, cb)
 })
 
 
 /**
- * Build frontend entry points with webpack.
+ * Build frontend entry points with webpack (for development).
  */
-gulp.task('f-build', ['f-clean'], function() {
+gulp.task('build', ['clean_previous_build'], function() {
     var config = assign(
         {},
         require(project_paths.webpack_config),
@@ -57,9 +57,9 @@ gulp.task('f-build', ['f-clean'], function() {
 
 
 /**
- * Watch source for changes, build on change.
+ * Watch source for changes, (development) build on change.
  */
-gulp.task('f-watch', ['f-clean'], function() {
+gulp.task('watch', ['clean_previous_build'], function() {
     var config = assign(
         {},
         require(project_paths.webpack_config),
@@ -76,7 +76,7 @@ gulp.task('f-watch', ['f-clean'], function() {
 /**
  * Run the frontend test suite once.
  */
-gulp.task('f-test', function(cb) {
+gulp.task('test-frontend', function(cb) {
     karma.start({
         configFile: project_paths.karma_config,
         singleRun: true
@@ -87,7 +87,7 @@ gulp.task('f-test', function(cb) {
 /**
  * Watch frontend source and tests for changes, run tests on change.
  */
-gulp.task('f-tdd', function(cb) {
+gulp.task('tdd-frontend', function(cb) {
     karma.start({
         configFile: project_paths.karma_config
     }, cb)
@@ -98,9 +98,9 @@ gulp.task('f-tdd', function(cb) {
  * Activate the project's python virtual environment.
  */
 gulp.task('workon', shell.task([
-    // 'workon mishkin.com'
+    // 'workon mishkin_com'
     // // ^ doesnt work because workon is an alias...
-    // 'source $HOME/.virtualenvs/mishkin.com/bin/activate'
+    // 'source $HOME/.virtualenvs/mishkin_com/bin/activate'
     // // ^ wont work because dependent shell tasks start a new shell instance
     'python -c "import django"'
     // ^ best hack i could think of for now, to ensure you are

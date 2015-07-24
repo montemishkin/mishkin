@@ -10,7 +10,7 @@ import Root from '../components/Root'
 
 // normalize css
 /* eslint-disable no-unused-vars */
-import normalize from '../../styles/normalize'
+import normalize from 'normalize.css'
 /* eslint-enable */
 
 

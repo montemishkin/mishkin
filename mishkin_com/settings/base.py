@@ -1,5 +1,5 @@
 '''
-Base django settings common to both live and local deployment.
+Base django settings common to both live and development instances.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.8/topics/settings/
@@ -24,9 +24,7 @@ UPLOADS_DIR = os.path.join(STATIC_DIR, 'uploads')
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1$oqgpa0b_*$ng@(_k842^lrvj79+igwt0262gb#g3_xd+1t17'
-
-ALLOWED_HOSTS = ['10.0.0.29']
+SECRET_KEY = '8c84^z5-8n3w5#a-&93hsvmrdzou-b@%*)q&!zg_5!xa0_s9(6'
 
 
 # Application definition

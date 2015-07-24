@@ -1,13 +1,14 @@
 # everything in the database directory
-db/*
-# except for the .gitme
-!db/.gitme
+db
 
 # frontend dependencies
 node_modules
 
 # everything in the frontend build directory
 mishkin_com/assets/build
+
+# static files collected for deployment
+static
 
 # any compiled python directories
 __pycache__

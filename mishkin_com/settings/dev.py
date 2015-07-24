@@ -1,5 +1,5 @@
 '''
-Django settings for local deployment.
+Django settings for use during development.
 '''
 
 # extend the base settings
@@ -19,7 +19,7 @@ INSTALLED_APPS += ('debug_toolbar', )
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db', 'mishkin.com.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db', 'mishkin_com.sqlite3'),
     }
 }
 

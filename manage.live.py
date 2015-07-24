@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 '''
-Django task manager for live stage management.
+Provides django task management during live stage.
 '''
 
 # when run from command line
