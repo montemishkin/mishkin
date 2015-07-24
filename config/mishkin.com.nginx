@@ -1,25 +1,28 @@
+# #
+# NGINX server configuration for mishkin.com
+# #
+
 server {
+    # listen to port 80 for IPv4 addresses
     listen 80;
+    # listen to port 80 for IPv6 addresses
     listen [::]:80;
+    # handle requests to localhost              ! for debug only !
     server_name 127.0.0.1;
 
-    client_max_body_size 4G;
+    # client_max_body_size 4G;
 
-    keepalive_timeout 5;
+    # keepalive_timeout 5;
 
-    # your Django project's static files - amend as required
+    # django project's static files
     location /static/ {
-        alias /home/mishkin_com/projects/mishkin_com;
+        root /home/mishkin_com/projects/mishkin_com;
     }
 
-    # Proxy the static assests for the Django Admin panel
-    location /static/admin {
-       alias /usr/lib/python2.7/dist-packages/django/contrib/admin/static/admin/;
-    }
-
+    # proxy all other location requests to gunicorn process via unix socket
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/mishkin_com/mishkin.com/mishkin_com.sock;
+        proxy_pass http://unix:/home/mishkin_com/projects/mishkin.com/mishkin_com.sock;
     }
 }
 

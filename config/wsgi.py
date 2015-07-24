@@ -13,10 +13,10 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 
-# set the environment variable django uses to hunt down application settings
+# use live settings module
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mishkin_com.settings.live')
 
-# build the application hook
+# expose `application` hook to application server
 application = get_wsgi_application()
 
 

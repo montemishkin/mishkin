@@ -13,9 +13,9 @@ DEBUG = False
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
+        'NAME': 'mishkin_com',
+        'USER': 'mishkin_com',
+        'PASSWORD': 'monte',
         'HOST': 'localhost',
         'PORT': '',
     }
