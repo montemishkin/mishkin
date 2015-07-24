@@ -26,7 +26,7 @@ UPLOADS_DIR = os.path.join(STATIC_DIR, 'uploads')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '1$oqgpa0b_*$ng@(_k842^lrvj79+igwt0262gb#g3_xd+1t17'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
