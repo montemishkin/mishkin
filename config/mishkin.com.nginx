@@ -1,21 +1,15 @@
-# the upstream application server (forward actual connections there)
-upstream mishkin.com_server {
-    server 127.0.0.1:9000 fail_timeout=0;
-}
-
-# the nginx server
 server {
-    server_name _; # _ means all hosts
-    client_max_body_size 4G;
-
     listen 80;
     listen [::]:80;
+    server_name 127.0.0.1;
+
+    client_max_body_size 4G;
 
     keepalive_timeout 5;
 
     # your Django project's static files - amend as required
-    location /static {
-        alias /home/projects/mishkin.com/repository/static;
+    location /static/ {
+        alias /home/mishkin_com/projects/mishkin_com;
     }
 
     # Proxy the static assests for the Django Admin panel
@@ -24,10 +18,8 @@ server {
     }
 
     location / {
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header Host $http_host;
-        proxy_redirect off;
-        proxy_pass http://mishkin.com_server;
+        include proxy_params;
+        proxy_pass http://unix:/home/mishkin_com/mishkin.com/mishkin_com.sock;
     }
 }
 
