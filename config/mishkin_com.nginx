@@ -9,7 +9,7 @@ server {
     listen [::]:80;
 
     # handle requests to localhost              ! for debug only !
-    server_name localhost;
+    server_name 10.0.0.29 localhost;
 
     # requests for static files
     location /static/ {

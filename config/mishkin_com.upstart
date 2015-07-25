@@ -4,7 +4,7 @@
 
 description "Gunicorn application server for mishkin_com django project"
 
-start on [2345]
+start on local-filesystems and net-device-up IFACE=wlan0
 stop on runlevel [!12345]
 
 # if process quits unexpectedly, trigger a respawn
