@@ -45,7 +45,7 @@ gulp.task('clean_previous_build', function(cb) {
 gulp.task('build', ['clean_previous_build'], function() {
     var config = assign(
         {},
-        require(project_paths.webpack_config),
+        require(project_paths.webpack_dev_config),
         {devtool: 'source-map'}
     )
 
@@ -62,11 +62,24 @@ gulp.task('build', ['clean_previous_build'], function() {
 gulp.task('watch', ['clean_previous_build'], function() {
     var config = assign(
         {},
-        require(project_paths.webpack_config),
-        {devtool: 'source-map', watch: true}
+        require(project_paths.webpack_dev_config),
+        {watch: true}
     )
 
     gulp.src(project_paths.entries_glob)
+        .pipe(named())
+        .pipe(webpack(config))
+        .pipe(gulp.dest(project_paths.build_dir))
+})
+
+
+/**
+ * Build frontend entry points for production.
+ */
+gulp.task('production-build', ['clean_previous_build'], function() {
+    var config = require(project_paths.webpack_live_config)
+
+    return gulp.src(project_paths.entries_glob)
         .pipe(named())
         .pipe(webpack(config))
         .pipe(gulp.dest(project_paths.build_dir))

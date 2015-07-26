@@ -43,10 +43,10 @@ module.exports = function(config) {
     // configure webpack
     webpack: {
         module: {
-            // use the same loaders as the local webpack config
-            loaders: require(project_paths.webpack_config).module.loaders
+            // use the same loaders as the development webpack config
+            loaders: require(project_paths.webpack_dev_config).module.loaders
         },
-        resolve: require(project_paths.webpack_config).resolve
+        resolve: require(project_paths.webpack_dev_config).resolve
     },
 
     // test results reporter to use

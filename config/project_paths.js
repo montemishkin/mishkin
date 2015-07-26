@@ -25,7 +25,9 @@ module.exports = {
     entries_glob: path.join(scripts_dir, 'entries', '*.js'),
     unit_tests_glob: path.join(scripts_dir, 'components', '*', 'tests.js'),
     karma_config: path.join(config_dir, 'karma.config.js'),
-    webpack_config: path.join(config_dir, 'webpack.config.js'),
+    webpack_base_config: path.join(config_dir, 'webpack.base.config.js'),
+    webpack_dev_config: path.join(config_dir, 'webpack.dev.config.js'),
+    webpack_live_config: path.join(config_dir, 'webpack.live.config.js'),
     eslint_config: path.join(config_dir, 'eslintrc'),
     babel_config: path.join(config_dir, 'babel.config.js'),
 }

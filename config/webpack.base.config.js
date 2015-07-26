@@ -1,5 +1,5 @@
 /*
- * Frontend build configuration using webpack.
+ * Base frontend build configuration common to both live and development builds.
  *   references:
  *     * http://webpack.github.io/docs/
  *     * https://github.com/petehunt/webpack-howto
