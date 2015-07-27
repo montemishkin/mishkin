@@ -93,17 +93,19 @@ gulp.task('test-frontend', function(cb) {
     karma.start({
         configFile: project_paths.karma_config,
         singleRun: true
-    }, cb)
+    }, function() {
+        cb()
+    })
 })
 
 
 /**
  * Watch frontend source and tests for changes, run tests on change.
  */
-gulp.task('tdd-frontend', function(cb) {
+gulp.task('tdd-frontend', function() {
     karma.start({
         configFile: project_paths.karma_config
-    }, cb)
+    })
 })
 
 

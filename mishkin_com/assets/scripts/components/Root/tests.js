@@ -17,63 +17,86 @@ import Root from './index'
 describe('Root', function() {
     let root
 
-
     beforeEach(function() {
         root = TestUtils.renderIntoDocument(<Root />)
     })
 
-
-    it('renders first two <p> tags with appropriate content', function() {
-        let ps = TestUtils.scryRenderedDOMComponentsWithTag(
-            root,
-            'p'
-        )
-
-        // first two (exactly two) <p> tags are rendered
-        expect(ps).to.have.length(2)
-        // first <p> tag has appropriate content
-        expect(ps[0].props.children).to.equal("Don't mess with")
-        // second <p> tag has appropriate content
-        expect(ps[1].props.children).to.equal("The Mishkins.")
+    it('starts out contracted', function() {
+        expect(root.state.expanded).to.be.false
     })
 
-
-    it('renders <button> with appropriate content', function() {
-        let button = TestUtils.findRenderedDOMComponentWithTag(
-            root,
-            'button'
-        )
-
-        // button has appropriate text content
-        expect(button.props.children).to.equal('Learn More')
+    it('toggles between expanded and contracted states', function() {
+        // find the button
+        let button = TestUtils.findRenderedDOMComponentWithTag(root, 'button')
+        // click the button
+        TestUtils.Simulate.click(button.getDOMNode())
+        // should be expanded now
+        expect(root.state.expanded).to.be.true
+        // click the button again
+        TestUtils.Simulate.click(button.getDOMNode())
+        // should be contracted now
+        expect(root.state.expanded).to.be.false
     })
 
-
-    it('removes the <button> and adds the third <p> when clicked', function() {
-        let button_node = TestUtils.findRenderedDOMComponentWithTag(
+    function test_header_render() {
+        let header = TestUtils.findRenderedDOMComponentWithTag(
             root,
-            'button'
-        ).getDOMNode()
-
-        TestUtils.Simulate.click(button_node)
-
-        // expect there to not be a button
-        expect(() => TestUtils.findRenderedDOMComponentWithTag(root, 'button'))
-            .to.throw(Error, 'Did not find exactly one match for tag:button')
-
-        let ps = TestUtils.scryRenderedDOMComponentsWithTag(
-            root,
-            'p'
+            'h1'
         )
+        expect(header.props.children).to.equal('The Mishkins')
+    }
 
-        // now (exactly) three <p> tags are rendered
-        expect(ps).to.have.length(3)
-        // first <p> tag still has appropriate content
-        expect(ps[0].props.children).to.equal("Don't mess with")
-        // second <p> tag still has appropriate content
-        expect(ps[1].props.children).to.equal("The Mishkins.")
-        // third <p> tag now has appropriate content
-        expect(ps[2].props.children).to.equal("Seriously.")
+    function test_subheader_render() {
+        let subheader = TestUtils.findRenderedDOMComponentWithTag(
+            root,
+            'h2'
+        )
+        expect(subheader.props.children).to.equal('More than just a family.')
+    }
+
+    describe('contracted', function() {
+        it('renders the header, with proper content', test_header_render)
+
+        it('renders the subheader, with proper content', test_subheader_render)
+
+        it('renders the "Learn More" button, with proper content', function() {
+            let button = TestUtils.findRenderedDOMComponentWithTag(
+                root,
+                'button'
+            )
+            expect(button.props.children).to.equal('Learn More')
+        })
+
+        it('does not render the "more" text')
+    })
+
+    describe('expanded', function() {
+        beforeEach(function() {
+            // find the button
+            let button = TestUtils.findRenderedDOMComponentWithTag(root, 'button')
+            // click the button
+            TestUtils.Simulate.click(button.getDOMNode())
+        })
+
+        it('renders the header, with proper content', test_header_render)
+
+        it('renders the subheader, with proper content', test_subheader_render)
+
+        it('renders the "Learn Less" button, with proper content', function() {
+            let button = TestUtils.findRenderedDOMComponentWithTag(
+                root,
+                'button'
+            )
+            expect(button.props.children).to.equal('Learn Less')
+        })
+
+        it('renders the "more" text, with proper content', function() {
+            let more = TestUtils.findRenderedDOMComponentWithTag(
+                root,
+                'p'
+            )
+            expect(more.props.children).to.equal('The Mishkins are a family, but they are also more.')
+        })
     })
 })
 
