@@ -11,7 +11,7 @@ import black_paper from '../../../images/black_paper.png'
 
 /* constants */
 const big_margin = 55
-const small_margin = 20
+const small_margin = 10
 const padding = 20
 const big_font_size = 80
 const small_font_size = 20
@@ -33,36 +33,36 @@ let styles = StyleSheet.create({
         backgroundColor: 'black',
         color: 'white',
         fontFamily: 'courier,  monospace',
+        fontWeight: 'normal',
     },
 
-    big_text: {
-        display: 'inline',
-        margin: small_margin,
-        fontSize: big_font_size,
+    banner: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center',
     },
 
-    small_text: {
-        margin: small_margin,
-        padding: padding,
-        fontSize: small_font_size,
-    },
-
-    expand: {
-        opacity: 1,
-        transition: `all ${animation_params}`,
-    },
-
-    contract: {
-        opacity: 0,
-        height: 0,
+    header: {
         margin: 0,
-        border: 0,
-        padding: 0,
-        transition: `all ${animation_params}`,
+        fontSize: big_font_size,
+        fontWeight: 'normal',
+    },
+
+    subheader: {
+        margin: 0,
+        fontSize: small_font_size,
+        fontWeight: 'normal',
+    },
+
+    more_text: {
+        // padding: padding,
+        marginTop: big_margin,
     },
 
     button: {
-        margin: small_margin,
+        marginTop: big_margin,
         border: 0,
         borderRadius: 10,
         outline: 0,
@@ -80,6 +80,21 @@ let styles = StyleSheet.create({
         backgroundColor: colors.blue.main,
         transition: `background-color ${animation_params}`,
     },
+
+    expand: {
+        opacity: 1,
+        transition: `all ${animation_params}`,
+    },
+
+    contract: {
+        opacity: 0,
+        height: 0,
+        margin: 0,
+        border: 0,
+        padding: 0,
+        transition: `all ${animation_params}`,
+    },
+
 })
 
 
