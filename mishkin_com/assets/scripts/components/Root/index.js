@@ -4,8 +4,7 @@
 
 /* common react imports */
 import React from 'react/addons'
-/* local imports */
-import styles from './styles'
+import classNames from 'classnames'
 
 
 // define component
@@ -24,29 +23,25 @@ class Root extends React.Component {
 
     // render component
     render() {
-        return (<div style={styles.container}>
-            <div style={styles.banner}>
-                <h1 style={styles.header}>
+        return (<div className={'container'}>
+            <div className={'banner'}>
+                <h1 className={'header'}>
                     The Mishkins
                 </h1>
-                <h2 style={styles.subheader}>
+                <h2 className={'subheader'}>
                     More than just a family.
                 </h2>
             </div>
-            <p styles={[
-                styles.more_text,
-                this.state.expanded && styles.expand,
-                !this.state.expanded && styles.contract,
-            ]}>
+            <p className={classNames({
+                more_text: true,
+                expand: this.state.expanded,
+                contract: !this.state.expanded,
+            })}>
                 The Mishkins are a family, but they are also more.
             </p>
             <button
                 type='button'
-                styles={[
-                    styles.button,
-                    this.state.button_focus && styles.button_focus,
-                    this.state.button_hover && styles.button_hover,
-                ]}
+                className={'button'}
                 onClick={() => this.setState({expanded: !this.state.expanded})}
                 onFocus={() => this.setState({button_focus: true})}
                 onBlur={() => this.setState({button_focus: false})}

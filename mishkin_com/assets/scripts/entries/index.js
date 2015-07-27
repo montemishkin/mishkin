@@ -8,9 +8,11 @@ import React from 'react/addons'
 import Root from '../components/Root'
 
 
-// normalize css
 /* eslint-disable no-unused-vars */
+// normalize css
 import normalize from 'normalize.css'
+// apply site style
+import style from '../../styles/style.css'
 /* eslint-enable */
 
 
