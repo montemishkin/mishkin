@@ -7,9 +7,6 @@
 import React from 'react/addons'
 import {addons} from 'react/addons'
 const TestUtils = addons.TestUtils
-/* common chai imports */
-import chai from 'chai'
-const expect = chai.expect
 /* local imports */
 import Root from './index'
 

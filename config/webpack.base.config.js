@@ -5,8 +5,6 @@
  *     * https://github.com/petehunt/webpack-howto
  */
 
-/* misc third party imports */
-var autoprefixer = require('autoprefixer-core')
 /* local imports */
 var project_paths = require('./project_paths')
 
@@ -24,7 +22,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.css$/,
-                loaders: ['style', 'css', 'postcss'],
+                loaders: ['style', 'css'],
             // inline base64 DataURLs for <=8k images, direct URLs for the rest
             }, {
                 test: /\.(png|jpg)$/,
@@ -48,9 +46,6 @@ module.exports = {
         configFile: project_paths.eslint_config,
         failOnError: true,
     },
-    postcss: [
-        autoprefixer(),
-    ],
 }
 
 

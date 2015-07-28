@@ -11,7 +11,7 @@ import Root from '../components/Root'
 /* eslint-disable no-unused-vars */
 // normalize css
 import normalize from 'normalize.css'
-// apply site style
+// apply site wide style
 import style from '../../styles/style.css'
 /* eslint-enable */
 

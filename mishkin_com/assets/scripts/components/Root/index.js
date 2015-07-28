@@ -4,10 +4,13 @@
 
 /* common react imports */
 import React from 'react/addons'
-import classNames from 'classnames'
+import Radium from 'radium'
+/* local imports */
+import styles from './styles'
 
 
 // define component
+@Radium
 class Root extends React.Component {
     constructor(props) {
         super(props)
@@ -15,42 +18,33 @@ class Root extends React.Component {
         // set initial state
         this.state = {
             expanded: false,
-            button_focus: false,
-            button_hover: false,
         }
     }
 
 
     // render component
     render() {
-        return (<div className={'container'}>
-            <div className={'banner'}>
-                <h1 className={'header'}>
+        return (<div style={styles.container}>
+            <div style={styles.banner}>
+                <h1 style={styles.header}>
                     The Mishkins
                 </h1>
-                <h2 className={'subheader'}>
+                <h2 style={styles.subheader}>
                     More than just a family.
                 </h2>
             </div>
-            <p className={classNames({
-                more_text: true,
-                expand: this.state.expanded,
-                contract: !this.state.expanded,
-            })}>
+            <p style={[
+                styles.more_text,
+                this.state.expanded && styles.fade_in,
+                !this.state.expanded && styles.fade_out,
+            ]}>
                 The Mishkins are a family, but they are also more.
             </p>
             <button
                 type='button'
-                className={'button'}
+                style={styles.button}
                 onClick={() => this.setState({expanded: !this.state.expanded})}
-                onFocus={() => this.setState({button_focus: true})}
-                onBlur={() => this.setState({button_focus: false})}
-                onMouseEnter={() => this.setState({button_hover: true})}
-                onMouseLeave={() => this.setState({button_hover: false})}
-            >{[
-                'Learn More',
-                'Learn Less',
-            ][+this.state.expanded]}</button>
+            >{this.state.expanded ? 'Learn Less' : 'Learn More'}</button>
         </div>)
     }
 }
