@@ -29,7 +29,7 @@ module.exports = {
                 loader: 'url',
                 query: {
                     limit: 8000,
-                    name: 'static/images/[name].[ext]',
+                    name: '[name].[ext]',
                 },
             }, {
                 test: /\.js$/,

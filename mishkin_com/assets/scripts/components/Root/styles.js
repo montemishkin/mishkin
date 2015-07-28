@@ -23,7 +23,7 @@ let styles = {
         minHeight: '100%',
         backgroundColor: 'black',
         /* black_paper pattern graciously provided by subtlepatterns.com */
-        backgroundImage: `url(static/build/${black_paper})`,
+        backgroundImage: `url(static/${black_paper})`,
         // backgroundImage: 'url(static/images/black_paper.png)',
         color: 'white',
         fontFamily: 'courier, monospace',

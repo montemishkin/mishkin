@@ -18,7 +18,7 @@ import mishkin_com
 BASE_DIR = os.path.abspath(os.path.join(mishkin_com.root_dir, os.pardir))
 APP_DIR = os.path.join(BASE_DIR, 'mishkin_com')
 TEMPLATES_DIR = os.path.join(APP_DIR, 'templates')
-RESOURCES_DIR = os.path.join(APP_DIR, 'assets')
+RESOURCES_DIR = os.path.join(APP_DIR, 'assets', 'build')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 UPLOADS_DIR = os.path.join(STATIC_DIR, 'uploads')
 
