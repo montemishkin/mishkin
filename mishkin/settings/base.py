@@ -11,12 +11,12 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # python imports
 import os
 # local imports
-import mishkin_com
+import mishkin
 
 
 # folder definitions
-BASE_DIR = os.path.abspath(os.path.join(mishkin_com.root_dir, os.pardir))
-APP_DIR = os.path.join(BASE_DIR, 'mishkin_com')
+BASE_DIR = os.path.abspath(os.path.join(mishkin.root_dir, os.pardir))
+APP_DIR = os.path.join(BASE_DIR, 'mishkin')
 TEMPLATES_DIR = os.path.join(APP_DIR, 'templates')
 RESOURCES_DIR = os.path.join(APP_DIR, 'assets', 'build')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
@@ -41,10 +41,10 @@ django_apps = (
 third_party_apps = (
 )
 
-mishkin_com_apps = (
+mishkin_apps = (
 )
 
-INSTALLED_APPS = mishkin_com_apps + third_party_apps + django_apps
+INSTALLED_APPS = mishkin_apps + third_party_apps + django_apps
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,7 +56,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'mishkin_com.urls'
+ROOT_URLCONF = 'mishkin.urls'
 
 APPEND_SLASH = True
 

@@ -1,8 +1,8 @@
 # #
-# Upstart script for the mishkin_com gunicorn application server.
+# Upstart script for the mishkin gunicorn application server.
 # #
 
-description "Gunicorn application server for mishkin_com django project"
+description "Gunicorn application server for mishkin django project"
 
 start on local-filesystems and net-device-up IFACE=wlan0
 stop on runlevel [!12345]
@@ -11,18 +11,18 @@ stop on runlevel [!12345]
 respawn
 
 # set user of process to desired user for this particular project
-setuid mishkin_com
+setuid mishkin
 # set group of process to same as nginx process
 setgid www-data
 
 # navigate to project directory
-chdir /home/mishkin_com/projects/mishkin_com
+chdir /home/mishkin/projects/mishkin
 
 # start server
-exec /home/mishkin_com/.virtualenvs/mishkin_com/bin/gunicorn \
-    --name mishkin_com \
+exec /home/mishkin/.virtualenvs/mishkin/bin/gunicorn \
+    --name mishkin \
     --workers 3 \
-    --bind unix:/home/mishkin_com/projects/mishkin_com/mishkin_com.sock \
+    --bind unix:/home/mishkin/projects/mishkin/mishkin.sock \
     config.wsgi:application
 
 

@@ -113,9 +113,9 @@ gulp.task('tdd-frontend', function() {
  * Activate the project's python virtual environment.
  */
 gulp.task('workon', shell.task([
-    // 'workon mishkin_com'
+    // 'workon mishkin'
     // // ^ doesnt work because workon is an alias...
-    // 'source $HOME/.virtualenvs/mishkin_com/bin/activate'
+    // 'source $HOME/.virtualenvs/mishkin/bin/activate'
     // // ^ wont work because dependent shell tasks start a new shell instance
     'python -c "import django"'
     // ^ best hack i could think of for now, to ensure you are

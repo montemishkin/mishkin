@@ -1,5 +1,5 @@
 # #
-# NGINX server configuration for mishkin_com.
+# NGINX server configuration for mishkin.
 # #
 
 server {
@@ -14,13 +14,13 @@ server {
     # requests for static files
     location /static/ {
         # route to django project's collected static files
-        root /home/mishkin_com/projects/mishkin_com;
+        root /home/mishkin/projects/mishkin;
     }
 
     # proxy all other location requests to gunicorn process via unix socket
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/mishkin_com/projects/mishkin_com/mishkin_com.sock;
+        proxy_pass http://unix:/home/mishkin/projects/mishkin/mishkin.sock;
     }
 }
 

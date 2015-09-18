@@ -1,4 +1,4 @@
-# mishkin_com
+# mishkin
 
 The code for mishkin.com.
 
@@ -7,7 +7,7 @@ The code for mishkin.com.
 
 ```shell
 cd path/to/project/root
-mkvirtualenv mishkin_com
+mkvirtualenv mishkin
 # install all dependencies
 pip install -r requirements.base.pip
 pip install -r requirements.dev.pip
@@ -33,7 +33,7 @@ Prerequisites:
 
 ```shell
 cd path/to/project/root
-mkvirtualenv mishkin_com
+mkvirtualenv mishkin
 # install all dependencies
 pip install -r requirements.base.pip
 pip install -r requirements.live.pip
@@ -46,13 +46,13 @@ npm install
 # collect all static assets
 ./manage.live.py collectstatic
 # configure the project as an upstart service
-sudo cp config/mishkin_com.upstart /etc/init/mishkin_com.conf
+sudo cp config/mishkin.upstart /etc/init/mishkin.conf
 # start up the service
-sudo service mishkin_com start
+sudo service mishkin start
 # link nginx configuration to sites-available
-sudo ln -s ~/projects/mishkin_com/config/mishkin_com.nginx /etc/nginx/sites-available/mishkin_com
+sudo ln -s ~/projects/mishkin/config/mishkin.nginx /etc/nginx/sites-available/mishkin
 # link from sites-available to sites-enabled
-sudo ln -s /etc/nginx/sites-available/mishkin_com /etc/nginx/sites-enables/mishkin_com
+sudo ln -s /etc/nginx/sites-available/mishkin /etc/nginx/sites-enables/mishkin
 # test nginx configuration for syntax errors
 sudo nginx -t
 # restart nginx
