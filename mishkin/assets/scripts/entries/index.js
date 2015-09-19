@@ -1,4 +1,4 @@
-/*
+/**
  * Main entry point.
  */
 
@@ -13,7 +13,7 @@ import Root from '../components/Root'
 import normalize from 'normalize.css'
 // apply site wide style
 import style from '../../styles/style.css'
-/* eslint-enable */
+/* eslint-enable no-unused-vars */
 
 
 // render root component to body

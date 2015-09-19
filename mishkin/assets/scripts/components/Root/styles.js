@@ -1,15 +1,33 @@
-/*
+/**
  * Style sheet for Root component.
  */
 
 /* local imports */
-import colors from '../../../styles/colors'
 import black_paper from '../../../images/black_paper.png'
 
 
-/* constants */
-const small_font_size = 20
-const animation_params = '0.2s ease-in-out'
+// common styling for small font
+const small_font = {
+    fontSize: 20,
+}
+
+// transition parameters common to all transition styles
+const transition_parameters = {
+    transitionDuration: '0.2s',
+    transitionTimingFunction: 'ease-in-out',
+}
+
+// background color transition class
+const background_color_transition = {
+    ...transition_parameters,
+    transitionProperty: 'background-color',
+}
+
+// opacity transition class
+const opacity_transition = {
+    ...transition_parameters,
+    transitionProperty: 'opacity',
+}
 
 
 // define the style sheet
@@ -18,24 +36,15 @@ let styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignContent: 'center',
         alignItems: 'center',
         minHeight: '100%',
         backgroundColor: 'black',
         /* black_paper pattern graciously provided by subtlepatterns.com */
-        backgroundImage: `url(static/${black_paper})`,
+        backgroundImage: `url(/static/${black_paper})`,
         // backgroundImage: 'url(static/images/black_paper.png)',
         color: 'white',
         fontFamily: 'courier, monospace',
         fontWeight: 'normal',
-    },
-
-    banner: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignContent: 'center',
-        alignItems: 'center',
     },
 
     header: {
@@ -45,44 +54,46 @@ let styles = {
     },
 
     subheader: {
+        ...small_font,
         margin: 0,
-        fontSize: small_font_size,
-        fontWeight: 'normal',
+    },
+
+    more_text: {
+        ...small_font,
+        marginTop: 20,
+        marginRight: 0,
+        marginBottom: 0,
+        marginLeft: 0,
     },
 
     button: {
+        ...background_color_transition,
+        ...small_font,
         marginTop: 40,
-        border: 0,
+        borderWidth: 0,
         borderRadius: 10,
         outline: 0,
         padding: 20,
-        fontSize: small_font_size,
-        backgroundColor: colors.blue.darker,
-        transition: `background-color ${animation_params}`,
+        backgroundColor: '#205692',
 
         ':focus': {
             outline: 0,
         },
 
         ':hover': {
-            backgroundColor: colors.blue.main,
-            transition: `background-color ${animation_params}`,
+            ...background_color_transition,
+            backgroundColor: '#104581',
         },
     },
 
-    more_text: {
-        fontSize: small_font_size,
-        margin: '20 0 0 0',
-    },
-
     fade_in: {
+        ...opacity_transition,
         opacity: 1,
-        transition: `opacity ${animation_params}`,
     },
 
     fade_out: {
+        ...opacity_transition,
         opacity: 0,
-        transition: `opacity ${animation_params}`,
     },
 }
 

@@ -1,4 +1,7 @@
-# Todo
+# TODO
+
+
+- responsive design
 
 - Root component's styles.js: the django static url is hardcoded here...
     - something weird is going on between
