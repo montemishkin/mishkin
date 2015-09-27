@@ -1,10 +1,8 @@
 # TODO
 
+- reconfigure tests
 
-- responsive design
-
-- Root component's styles.js: the django static url is hardcoded here...
-    - something weird is going on between
-        - webpack url-loader query value for name key
-        - hardcoded path in mishkin/assets/styles/style.css
-        - django static url and static files configurations
+- styling
+    - responsive design
+    - url/file-loader
+    - universal radium causes differences in server and client rendered styles (due to vendor prefixing)
