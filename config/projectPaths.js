@@ -48,6 +48,7 @@ module.exports = {
     // globs
     clientBuildGlob: path.join(buildDir, 'client', '*'),
     serverBuildGlob: path.join(buildDir, 'server', '*'),
+    testsGlob: path.join(sourceDir, '**', 'tests.js'),
     // configuration files
     eslintConfig: path.join(configDir, 'eslint.json'),
     karmaConfig: path.join(configDir, 'karma.js'),

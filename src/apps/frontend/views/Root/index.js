@@ -5,22 +5,21 @@ import radium from 'radium'
 import styles from './styles'
 
 
-/**
- * Root level component.
- */
 @radium
 export default class Root extends React.Component {
     constructor(...args) {
-        // instantiate this
+        // instantiate `this`
         super(...args)
         // set initial state
         this.state = {
-            expanded: false,
+            isExpanded: false,
         }
     }
 
 
     render() {
+        const {isExpanded} = this.state
+
         return (<div style={styles.container}>
             <h1 style={styles.header}>
                 The Mishkins
@@ -31,8 +30,8 @@ export default class Root extends React.Component {
             <p
                 style={[
                     styles.moreText,
-                    this.state.expanded && styles.fadeIn,
-                    !this.state.expanded && styles.fadeOut,
+                    isExpanded && styles.fadeIn,
+                    !isExpanded && styles.fadeOut,
                 ]}
             >
                 The Mishkins are a family, but they are also more.
@@ -40,9 +39,9 @@ export default class Root extends React.Component {
             <button
                 type='button'
                 style={styles.button}
-                onClick={() => this.setState({expanded: !this.state.expanded})}
+                onClick={() => this.setState({isExpanded: !isExpanded})}
             >
-                {this.state.expanded ? 'Learn Less' : 'Learn More'}
+                {isExpanded ? 'Learn Less' : 'Learn More'}
             </button>
         </div>)
     }

@@ -30,7 +30,7 @@ export default {
         alignItems: 'center',
         minHeight: '100%',
         backgroundColor: 'black',
-        /* black-paper pattern graciously provided by subtlepatterns.com */
+        // black-paper pattern graciously provided by subtlepatterns.com
         backgroundImage: 'url(/static/images/black-paper.png)',
         color: 'white',
         fontFamily: 'courier, monospace',

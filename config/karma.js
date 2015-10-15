@@ -1,87 +1,78 @@
-/*
- * Karma configuration
- *   Generated on Sun Apr 26 2015 20:48:39 GMT-0700 (PDT)
+/**
+ * Karma configuration.
+ *   references:
+ *     http://karma-runner.github.io/0.13/config/configuration-file.html
  */
 
-module.exports = function(config) {
-  config.set({
-
-    // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+// local imports
+var projectPaths = require('./projectPaths')
+var webpackBaseConfig = require(projectPaths.webpackBaseConfig)
 
 
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai'],
+// annoying hack to be able to dynamically set keys on object
+var preprocessors = {}
+// stay sane people
+if (typeof projectPaths.testsGlob === 'undefined') {
+    throw new Error('Hey.  Where\'s the tests glob?')
+}
+preprocessors[projectPaths.testsGlob] = ['webpack', 'sourcemap']
 
 
-    // list of files / patterns to load in the browser
-    files: [
-        'src/**/test_*.js'
-    ],
+module.exports = function (config) {
+    config.set({
+        // base path that will be used to resolve all patterns (eg. files, exclude)
+        basePath: projectPaths.rootDir,
 
+        // frameworks to use
+        // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+        frameworks: [
+            'mocha',
+            'sinon-chai',
+        ],
 
-    // list of files to exclude
-    exclude: [
-    ],
+        // list of files / patterns to load in the browser
+        files: [
+            projectPaths.testsGlob,
+        ],
 
+        // preprocess matching files before serving them to the browser
+        // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+        preprocessors: preprocessors,
 
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-        'src/**/test_*.js': ['webpack']
-    },
-
-    // configure webpack
-    webpack: {
-        module: {
-            // use the same loaders as the local webpack config
-            loaders: require("./webpack.config.js").module.loaders
+        // configure webpack using settings from development webpack config
+        webpack: {
+            module: {
+                loaders: webpackBaseConfig.module.loaders
+            },
+            resolve: webpackBaseConfig.resolve,
+            devtool: 'inline-source-map',
         },
-        resolve: require("./webpack.config.js").resolve
-    },
 
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+        webpackMiddleware: {
+            noInfo: true,
+        },
 
+        // test results reporter to use
+        // possible values: 'dots', 'progress'
+        // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+        reporters: ['mocha'],
 
-    // web server port
-    port: 9876,
+        // web server port
+        port: 9876,
 
+        // level of logging
+        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+        // logLevel: config.LOG_DISABLE,
 
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
-
-
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_DISABLE,
-
-
-    // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
-
-
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome',],
-
-
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
-
-    // activate necessary plugins
-    plugins: [
-        require('karma-webpack'),
-        'karma-mocha',
-        'karma-chai',
-        'karma-chrome-launcher'
-    ]
-  });
-};
+        // start these browsers
+        // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+        browsers: [
+            // 'Chrome',
+            'Firefox',
+            // 'Safari',
+        ],
+    })
+}
 
 
 // end of file

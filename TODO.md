@@ -1,6 +1,6 @@
 # TODO
 
-- reconfigure tests
+- favicon
 
 - styling
     - responsive design
