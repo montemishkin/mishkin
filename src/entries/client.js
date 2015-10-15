@@ -1,20 +1,14 @@
-// react imports
+// fix browser land
+import 'babel-core/polyfill'
+// third party imports
 import React from 'react'
-import react_dom from 'react-dom'
-import {Router} from 'react-router'
-import createBrowserHistory from 'history/lib/createBrowserHistory'
+import ReactDOM from 'react-dom'
 // local imports
-import routes from 'apps/frontend/routes'
+import Root from 'views/Root'
 
 
-/* eslint-disable no-unused-vars */
-// normalize css
-import normalize from 'normalize.css'
-/* eslint-enable no-unused-vars */
-
-
-// render the routed application
-react_dom.render(
-    <Router routes={routes} history={createBrowserHistory()} />,
+// render the root component to the dom
+ReactDOM.render(
+    <Root />,
     document.getElementById('app')
 )

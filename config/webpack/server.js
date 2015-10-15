@@ -1,52 +1,60 @@
-/**
- * Webpack configuration for server builds.
- */
-
-// webpack imports
+// node imports
+var fs = require('fs')
+var process = require('process')
+// third party imports
 var webpack = require('webpack')
-// misc third party imports
 var assign = require('lodash/object/assign')
 // local imports
-var project_paths = require('../project_paths')
+var projectPaths = require('../projectPaths')
+var baseConfig = require(projectPaths.webpackBaseConfig)
 
 
-// default to using development configuration
-var further_config = require(project_paths.webpack_dev_config)
-// if we are in a production environment
-if (process.env.NODE_ENV === 'production') {
-    // use production configuration instead
-    further_config = require(project_paths.webpack_prod_config)
+// dict of node modules to treat as externals
+// reference: http://jlongster.com/Backend-Apps-with-Webpack--Part-I
+var nodeModules = fs.readdirSync('node_modules')
+    // filter out the .bin dir
+    .filter(function (dir) {
+        return dir !== '.bin'
+    })
+    // create the data structure desired by webpack
+    .reduce(function (state, dir) {
+        var dummy = {}
+        dummy[dir] = 'commonjs ' + dir
+
+        return assign({}, state, dummy)
+    }, {})
+
+
+// extend the base configuration's plugins
+var plugins = baseConfig.plugins
+// if in development setting
+if (process.env.NODE_ENV !== 'production') {
+    // add source map support
+    plugins.concat(new webpack.BannerPlugin(
+        'require("source-map-support").install();',
+        {
+            raw: true,
+            entryOnly: false,
+        }
+    ))
 }
 
-// export only the additional configuration for server builds
-module.exports = assign({},
-    require(project_paths.webpack_base_config),
-    further_config,
-    {
-        output: {
-            libraryTarget: 'commonjs2',
-        },
-        target: 'node',
-        node: {
-            console: false,
-            process: true,
-            global: true,
-            Buffer: true,
-            __filename: false,
-            __dirname: false,
-        },
-        externals: [
-            // any required module that fits this regex is NOT bundled
-            /^[a-zA-z\-0-9]+$/
-        ],
-        plugins: [
-            new webpack.BannerPlugin(
-                "require('source-map-support').install();",
-                { raw: true, entryOnly: false }
-            )
-        ],
-    }
-)
+
+module.exports = assign({}, baseConfig, {
+    target: 'node',
+    // don't bundle node modules
+    externals: nodeModules,
+    plugins: plugins,
+    node: {
+        console: true,
+        global: true,
+        process: true,
+        Buffer: true,
+        __dirname: true,
+        __filename: true,
+        path: true,
+    },
+})
 
 
 // end of file

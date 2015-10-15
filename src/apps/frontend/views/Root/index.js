@@ -1,7 +1,7 @@
-/* common react imports */
+// third party imports
 import React from 'react'
 import radium from 'radium'
-/* local imports */
+// local imports
 import styles from './styles'
 
 
@@ -9,7 +9,7 @@ import styles from './styles'
  * Root level component.
  */
 @radium
-class Root extends React.Component {
+export default class Root extends React.Component {
     constructor(...args) {
         // instantiate this
         super(...args)
@@ -30,9 +30,9 @@ class Root extends React.Component {
             </p>
             <p
                 style={[
-                    styles.more_text,
-                    this.state.expanded && styles.fade_in,
-                    !this.state.expanded && styles.fade_out,
+                    styles.moreText,
+                    this.state.expanded && styles.fadeIn,
+                    !this.state.expanded && styles.fadeOut,
                 ]}
             >
                 The Mishkins are a family, but they are also more.
@@ -47,10 +47,6 @@ class Root extends React.Component {
         </div>)
     }
 }
-
-
-// export root component
-export default Root
 
 
 // end of file

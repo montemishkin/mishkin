@@ -1,43 +1,64 @@
-/**
- * Base build configuration common to both live and development builds.
- *   references:
- *     * http://webpack.github.io/docs/
- *     * https://github.com/petehunt/webpack-howto
- */
-
+// webpack imports
+var webpack = require('webpack')
 // local imports
-var project_paths = require('../project_paths')
+var projectPaths = require('../projectPaths')
 
 
-// export the configuration
+// default to using development configuration
+var devtool = 'source-map'
+var plugins = []
+// if we are in a production environment
+if (process.env.NODE_ENV === 'production') {
+    // use production configuration instead
+    devtool = ''
+    plugins.push(
+        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.DedupePlugin()
+    )
+}
+
+
+// export webpack configuration object
 module.exports = {
     module: {
         preLoaders: [
             {
                 test: /\.js$/,
                 loader: 'eslint',
-                include: project_paths.source_dir,
+                include: projectPaths.sourceDir,
             },
         ],
         loaders: [
             {
+                test: /\.js$/,
+                loader: 'babel',
+                include: projectPaths.sourceDir,
+                query: {
+                    optional: ['runtime'],
+                    stage: 0,
+                },
+            }, {
                 test: /\.css$/,
                 loaders: ['style', 'css'],
-            }, {
-                test: /\.js$/,
-                loader: 'babel?stage=0',
-                include: project_paths.source_dir,
             },
         ],
     },
     resolve: {
         extensions: ['', '.js'],
-        root: [project_paths.source_dir, project_paths.root_dir]
+        root: [
+            projectPaths.frontendDir,
+            projectPaths.assetsDir,
+            projectPaths.sourceDir,
+            projectPaths.rootDir,
+        ],
     },
     eslint: {
-        configFile: project_paths.eslint_config,
+        configFile: projectPaths.eslintConfig,
         failOnError: true,
     },
+    plugins: plugins,
+    devtool: devtool,
 }
 
 

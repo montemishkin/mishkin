@@ -1,34 +1,28 @@
-/**
- * Style sheet for Root component.
- */
-
-
 // common styling for small font
-const small_font = {
+const smallFont = {
     fontSize: 20,
 }
 
 // transition parameters common to all transition styles
-const transition_parameters = {
+const transitionParameters = {
     transitionDuration: '0.2s',
     transitionTimingFunction: 'ease-in-out',
 }
 
 // background color transition class
-const background_color_transition = {
-    ...transition_parameters,
+const backgroundColorTransition = {
+    ...transitionParameters,
     transitionProperty: 'background-color',
 }
 
 // opacity transition class
-const opacity_transition = {
-    ...transition_parameters,
+const opacityTransition = {
+    ...transitionParameters,
     transitionProperty: 'opacity',
 }
 
 
-// define the style sheet
-const styles = {
+export default {
     container: {
         display: 'flex',
         flexDirection: 'column',
@@ -36,8 +30,8 @@ const styles = {
         alignItems: 'center',
         minHeight: '100%',
         backgroundColor: 'black',
-        /* black_paper pattern graciously provided by subtlepatterns.com */
-        backgroundImage: 'url(static/images/black_paper.png)',
+        /* black-paper pattern graciously provided by subtlepatterns.com */
+        backgroundImage: 'url(/static/images/black-paper.png)',
         color: 'white',
         fontFamily: 'courier, monospace',
         fontWeight: 'normal',
@@ -50,12 +44,12 @@ const styles = {
     },
 
     subheader: {
-        ...small_font,
+        ...smallFont,
         margin: 0,
     },
 
-    more_text: {
-        ...small_font,
+    moreText: {
+        ...smallFont,
         marginTop: 20,
         marginRight: 0,
         marginBottom: 0,
@@ -63,8 +57,8 @@ const styles = {
     },
 
     button: {
-        ...background_color_transition,
-        ...small_font,
+        ...backgroundColorTransition,
+        ...smallFont,
         marginTop: 40,
         borderWidth: 0,
         borderRadius: 10,
@@ -77,25 +71,21 @@ const styles = {
         },
 
         ':hover': {
-            ...background_color_transition,
+            ...backgroundColorTransition,
             backgroundColor: '#104581',
         },
     },
 
-    fade_in: {
-        ...opacity_transition,
+    fadeIn: {
+        ...opacityTransition,
         opacity: 1,
     },
 
-    fade_out: {
-        ...opacity_transition,
+    fadeOut: {
+        ...opacityTransition,
         opacity: 0,
     },
 }
-
-
-// export the style sheet
-export default styles
 
 
 // end of file

@@ -35,7 +35,7 @@ describe('Root', function() {
         expect(root.state.expanded).to.be.false
     })
 
-    function test_header_render() {
+    function testHeaderRender() {
         let header = TestUtils.findRenderedDOMComponentWithTag(
             root,
             'h1'
@@ -43,7 +43,7 @@ describe('Root', function() {
         expect(header.props.children).to.equal('The Mishkins')
     }
 
-    function test_subheader_render() {
+    function testSubheaderRender() {
         let subheader = TestUtils.findRenderedDOMComponentWithTag(
             root,
             'h2'
@@ -52,9 +52,9 @@ describe('Root', function() {
     }
 
     describe('contracted', function() {
-        it('renders the header, with proper content', test_header_render)
+        it('renders the header, with proper content', testHeaderRender)
 
-        it('renders the subheader, with proper content', test_subheader_render)
+        it('renders the subheader, with proper content', testSubheaderRender)
 
         it('renders the "Learn More" button, with proper content', function() {
             let button = TestUtils.findRenderedDOMComponentWithTag(
@@ -75,9 +75,9 @@ describe('Root', function() {
             TestUtils.Simulate.click(button.getDOMNode())
         })
 
-        it('renders the header, with proper content', test_header_render)
+        it('renders the header, with proper content', testHeaderRender)
 
-        it('renders the subheader, with proper content', test_subheader_render)
+        it('renders the subheader, with proper content', testSubheaderRender)
 
         it('renders the "Learn Less" button, with proper content', function() {
             let button = TestUtils.findRenderedDOMComponentWithTag(
