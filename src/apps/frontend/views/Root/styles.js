@@ -28,58 +28,65 @@ export default {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+
+        boxSizing: 'border-box',
         minHeight: '100%',
+        padding: 100,
+
         backgroundColor: 'black',
         // black-paper pattern graciously provided by subtlepatterns.com
         backgroundImage: 'url(/static/images/black-paper.png)',
         color: 'white',
         fontFamily: 'courier, monospace',
-        fontWeight: 'normal',
     },
+
 
     header: {
         margin: 0,
         fontSize: 80,
         fontWeight: 'normal',
+        textAlign: 'center',
     },
+
 
     subheader: {
         ...smallFont,
         margin: 0,
+        textAlign: 'center',
     },
+
 
     moreText: {
         ...smallFont,
-        marginTop: 20,
+        marginTop: 15,
         marginRight: 0,
         marginBottom: 0,
         marginLeft: 0,
+        textAlign: 'center',
     },
+
 
     button: {
         ...backgroundColorTransition,
         ...smallFont,
-        marginTop: 40,
+        marginTop: 20,
         borderWidth: 0,
         borderRadius: 10,
         outline: 0,
         padding: 20,
-        backgroundColor: '#205692',
-
-        ':focus': {
-            outline: 0,
-        },
+        backgroundColor: '#135196',
 
         ':hover': {
-            ...backgroundColorTransition,
-            backgroundColor: '#104581',
+            backgroundColor: '#2361A6',
         },
     },
+
 
     fadeIn: {
         ...opacityTransition,
         opacity: 1,
     },
+
 
     fadeOut: {
         ...opacityTransition,
