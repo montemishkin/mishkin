@@ -1,6 +1,7 @@
 # TODO
 
 - favicon
+- google analytics
 
 - styling
     - responsive design
