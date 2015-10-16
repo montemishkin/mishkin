@@ -1,3 +1,3 @@
 # mishkin
 
-The code for [mishkin.com](http://mishkin.com).
+Live at [mishkin.com](http://mishkin.com).
