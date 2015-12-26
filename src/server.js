@@ -37,7 +37,13 @@ server.use(logger('dev'))
 server.use('/static', serveStatic(buildDir), serveStatic(assetsDir))
 // any url that hits this server
 server.all('*', (req, res) => {
-    const renderedComponent = renderToString(<Root />)
+    const renderedComponent = renderToString(
+        <Root
+            radiumConfig={{
+                userAgent: req.headers['user-agent'],
+            }}
+        />
+    )
 
     // see: https://github.com/nfl/react-helmet#server-usage
     Helmet.rewind()
