@@ -27,12 +27,10 @@ RUN \
     && rm -rf /var/lib/apt/lists/* \
     # upgrade npm
     && npm install -g npm \
-    # install pm2 and gulp
-    && npm install -g pm2 gulp \
-    # install app's node dependencies
-    && npm install \
-    # build app
-    && gulp build-production \
+    # install pm2
+    && npm install -g pm2 \
+    # install node dependencies
+    && npm install --production \
     # link nginx config
     && ln -s $APP_ROOT_DIR/config/nginx /etc/nginx/conf.d/mishkin.conf \
     # remove nginx example server

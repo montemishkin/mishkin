@@ -1,8 +1,13 @@
 # exclude everything
 *
-
 # include only desired resources
-!src/
-!config/
-!gulpfile.babel.js
+
+# needed for list of node dependencies
 !package.json
+# built files
+!build/
+# public assets
+!src/assets/
+!src/templates/
+# nginx config
+!config/nginx

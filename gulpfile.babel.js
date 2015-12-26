@@ -9,6 +9,7 @@ import karma from 'karma'
 import autoprefixer from 'autoprefixer'
 import postcss from 'gulp-postcss'
 import nodemon from 'gulp-nodemon'
+import shell from 'gulp-shell'
 // local imports
 import {
     buildDir,
@@ -124,9 +125,12 @@ gulp.task('tdd', () => {
 
 
 /**
- * One step production build.
+ * Build into a docker container
  */
-gulp.task('build-production', ['build-styles', 'build-client-production', 'build-server-production'])
+gulp.task('containerize',
+    ['clean-build', 'build-styles', 'build-client-production', 'build-server-production'],
+    shell.task('docker build -t mishkin .')
+)
 
 
 /**
@@ -170,4 +174,12 @@ gulp.task('clean-client', () => {
  */
 gulp.task('clean-server', () => {
     del.sync(serverBuildGlob)
+})
+
+
+/**
+ * Remove ALL previously built files.
+ */
+gulp.task('clean-build', () => {
+    del.sync(buildDir)
 })
