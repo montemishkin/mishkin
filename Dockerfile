@@ -32,7 +32,7 @@ RUN \
     # install app's node dependencies
     && npm install \
     # build app
-    && gulp build-server-production build-client-production \
+    && gulp build-production \
     # link nginx config
     && ln -s $APP_ROOT_DIR/config/nginx /etc/nginx/conf.d/mishkin.conf \
     # remove nginx example server
@@ -40,6 +40,6 @@ RUN \
 
 CMD \
     # start application instance
-    pm2 start $APP_ROOT_DIR/build/server.js \
+    pm2 start $APP_ROOT_DIR/build/index.js \
     # run nginx in foreground
     && nginx -g 'daemon off;'

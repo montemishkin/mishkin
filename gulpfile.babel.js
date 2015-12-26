@@ -124,6 +124,12 @@ gulp.task('tdd', () => {
 
 
 /**
+ * One step production build.
+ */
+gulp.task('build-production', ['build-styles', 'build-client-production', 'build-server-production'])
+
+
+/**
  * Build client entry point for production.
  */
 gulp.task('build-client-production', ['clean-client'], () => {
