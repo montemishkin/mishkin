@@ -1,0 +1,8 @@
+# exclude everything
+*
+
+# include only desired resources
+!src/
+!config/
+!gulpfile.babel.js
+!package.json
