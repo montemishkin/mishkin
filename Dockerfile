@@ -1,4 +1,5 @@
-FROM ubuntu:14.04
+FROM debian:stable
+EXPOSE 80
 
 # root directory of app
 ENV APP_ROOT_DIR /root/mishkin
@@ -6,7 +7,6 @@ ENV APP_ROOT_DIR /root/mishkin
 COPY . $APP_ROOT_DIR
 # change into app root dir
 WORKDIR $APP_ROOT_DIR
-
 
 RUN \
     # update packages lists
@@ -18,8 +18,9 @@ RUN \
         build-essential \
         curl \
         git \
-    && curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - \
+        python \
     # install node
+    && curl -sL https://deb.nodesource.com/setup_4.x | bash - \
     && apt-get install -y nodejs \
     # clean up (to reduce image size)
     && apt-get clean \
@@ -27,21 +28,18 @@ RUN \
     # upgrade npm
     && npm install -g npm \
     # install pm2 and gulp
-    && npm install -g pm2 gulp
-
-RUN \
+    && npm install -g pm2 gulp \
     # install app's node dependencies
-    npm install \
+    && npm install \
     # build app
     && gulp build-server-production build-client-production \
     # link nginx config
     && ln -s $APP_ROOT_DIR/config/nginx /etc/nginx/conf.d/mishkin.conf \
-    # remove example server
+    # remove nginx example server
     && rm /etc/nginx/sites-enabled/default
 
-
-
-EXPOSE 80
-# default to running nginx in foreground
-CMD pm2 start /root/mishkin/build/server.js \
+CMD \
+    # start application instance
+    pm2 start $APP_ROOT_DIR/build/server.js \
+    # run nginx in foreground
     && nginx -g 'daemon off;'
