@@ -1,6 +1,5 @@
 // node imports
 var fs = require('fs')
-var process = require('process')
 // third party imports
 var webpack = require('webpack')
 var assign = require('lodash/object/assign')
@@ -27,18 +26,14 @@ var nodeModules = fs.readdirSync('node_modules')
 
 // extend the base configuration's plugins
 var plugins = baseConfig.plugins
-// if in development setting
-if (process.env.NODE_ENV !== 'production') {
-    // add source map support
-    plugins.concat(new webpack.BannerPlugin(
-        'require("source-map-support").install();',
-        {
-            raw: true,
-            entryOnly: false,
-        }
-    ))
-}
-
+// add source map support
+plugins.concat(new webpack.BannerPlugin(
+    'require("source-map-support").install();',
+    {
+        raw: true,
+        entryOnly: false,
+    }
+))
 
 module.exports = assign({}, baseConfig, {
     target: 'node',
@@ -55,6 +50,3 @@ module.exports = assign({}, baseConfig, {
         path: true,
     },
 })
-
-
-// end of file

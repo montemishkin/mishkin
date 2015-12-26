@@ -1,4 +1,4 @@
-// webpack imports
+// third party imports
 var webpack = require('webpack')
 // local imports
 var projectPaths = require('../projectPaths')
@@ -7,11 +7,14 @@ var projectPaths = require('../projectPaths')
 // default to using development configuration
 var devtool = 'source-map'
 var plugins = []
-// if we are in a production environment
+// if we are in production environment
 if (process.env.NODE_ENV === 'production') {
     // use production configuration instead
     devtool = ''
     plugins.push(
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production'),
+        }),
         new webpack.optimize.UglifyJsPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.DedupePlugin()
@@ -38,17 +41,12 @@ module.exports = {
                     optional: ['runtime'],
                     stage: 0,
                 },
-            }, {
-                test: /\.css$/,
-                loaders: ['style', 'css'],
             },
         ],
     },
     resolve: {
         extensions: ['', '.js'],
         root: [
-            projectPaths.frontendDir,
-            projectPaths.assetsDir,
             projectPaths.sourceDir,
             projectPaths.rootDir,
         ],
@@ -60,6 +58,3 @@ module.exports = {
     plugins: plugins,
     devtool: devtool,
 }
-
-
-// end of file

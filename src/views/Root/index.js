@@ -1,6 +1,7 @@
 // third party imports
 import React from 'react'
 import radium from 'radium'
+import Helmet from 'react-helmet'
 // local imports
 import styles from './styles'
 
@@ -21,6 +22,7 @@ export default class Root extends React.Component {
         const {isExpanded} = this.state
 
         return (<div style={styles.container}>
+            <Helmet title='The Mishkins' />
             <h1 style={styles.header}>
                 The Mishkins
             </h1>
@@ -46,6 +48,3 @@ export default class Root extends React.Component {
         </div>)
     }
 }
-
-
-// end of file

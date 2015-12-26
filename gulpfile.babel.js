@@ -3,9 +3,12 @@ import gulp from 'gulp'
 import del from 'del'
 import webpack from 'webpack-stream'
 import named from 'vinyl-named'
-import env from 'gulp-env'
-import shell from 'gulp-shell'
+import minifyCSS from 'gulp-minify-css'
+import concat from 'gulp-concat'
 import karma from 'karma'
+import autoprefixer from 'autoprefixer'
+import postcss from 'gulp-postcss'
+import nodemon from 'gulp-nodemon'
 // local imports
 import {
     buildDir,
@@ -14,39 +17,28 @@ import {
     serverBuildGlob,
     clientEntry,
     serverEntry,
+    cssGlob,
     webpackClientConfig as webpackClientConfigPath,
     webpackServerConfig as webpackServerConfigPath,
     karmaConfig as karmaConfigPath,
 } from './config/projectPaths'
-const webpackClientConfig = require(webpackClientConfigPath)
-const webpackServerConfig = require(webpackServerConfigPath)
+
+
+/**
+ * Default to watching client and server, and runing server.
+ */
+gulp.task('default', ['watch-server', 'watch-client', 'watch-styles', 'runserver'])
 
 
 /**
  * Run the development server.
  */
-gulp.task('runserver', shell.task('nodemon ' + serverBuild))
-
-
-/**
- * Build client entry point.
- */
-gulp.task('build-client', ['clean-client'], () => {
-    return gulp.src(clientEntry)
-               .pipe(named())
-               .pipe(webpack(webpackClientConfig))
-               .pipe(gulp.dest(buildDir))
-})
-
-
-/**
- * Build server entry point.
- */
-gulp.task('build-server', ['clean-server'], () => {
-    return gulp.src(serverEntry)
-               .pipe(named())
-               .pipe(webpack(webpackServerConfig))
-               .pipe(gulp.dest(buildDir))
+gulp.task('runserver', () => {
+    nodemon({
+        script: serverBuild,
+        watch: serverBuild,
+        args: ['8000'],
+    })
 })
 
 
@@ -55,14 +47,14 @@ gulp.task('build-server', ['clean-server'], () => {
  */
 gulp.task('watch-client', ['clean-client'], () => {
     const config = {
-        ...webpackClientConfig,
+        ...require(webpackClientConfigPath),
         watch: true,
     }
 
     return gulp.src(clientEntry)
-               .pipe(named())
-               .pipe(webpack(config))
-               .pipe(gulp.dest(buildDir))
+        .pipe(named())
+        .pipe(webpack(config))
+        .pipe(gulp.dest(buildDir))
 })
 
 
@@ -71,66 +63,38 @@ gulp.task('watch-client', ['clean-client'], () => {
  */
 gulp.task('watch-server', ['clean-server'], () => {
     const config = {
-        ...webpackServerConfig,
+        ...require(webpackServerConfigPath),
         watch: true,
     }
 
     return gulp.src(serverEntry)
-               .pipe(named())
-               .pipe(webpack(config))
-               .pipe(gulp.dest(buildDir))
+        .pipe(named())
+        .pipe(webpack(config))
+        .pipe(gulp.dest(buildDir))
 })
 
 
 /**
- * Build client entry point for production.
+ * Watch styles only. Rebuild on change.
  */
-gulp.task('build-client-production', ['clean-client'], () => {
-    // set environment variable
-    env({
-        vars: {
-            NODE_ENV: 'production',
-        },
-    })
-    // build client
-    return gulp.src(clientEntry)
-               .pipe(named())
-               .pipe(webpack(webpackClientConfig))
-               .pipe(gulp.dest(buildDir))
+gulp.task('watch-styles', ['build-styles'], () => {
+    gulp.watch(cssGlob, ['build-styles'])
 })
 
 
 /**
- * Build server entry point for production.
+ * Build styles only.
  */
-gulp.task('build-server-production', ['clean-server'], () => {
-    // set environment variable
-    env({
-        vars: {
-            NODE_ENV: 'production',
-        },
-    })
-    // build server
-    return gulp.src(serverEntry)
-               .pipe(named())
-               .pipe(webpack(webpackServerConfig))
-               .pipe(gulp.dest(buildDir))
-})
-
-
-/**
- * Remove all ouptut files from previous client builds.
- */
-gulp.task('clean-client', () => {
-    del.sync(clientBuildGlob)
-})
-
-
-/**
- * Remove all ouptut files from previous server builds.
- */
-gulp.task('clean-server', () => {
-    del.sync(serverBuildGlob)
+gulp.task('build-styles', () => {
+    return gulp.src(cssGlob)
+        .pipe(postcss([
+            autoprefixer({
+                browsers: ['last 2 versions'],
+            }),
+        ]))
+        .pipe(concat('styles.css'))
+        .pipe(minifyCSS())
+        .pipe(gulp.dest(buildDir))
 })
 
 
@@ -159,4 +123,45 @@ gulp.task('tdd', () => {
 })
 
 
-// end of file
+/**
+ * Build client entry point for production.
+ */
+gulp.task('build-client-production', ['clean-client'], () => {
+    process.env.NODE_ENV = 'production'
+
+    // build client
+    return gulp.src(clientEntry)
+        .pipe(named())
+        .pipe(webpack(require(webpackClientConfigPath)))
+        .pipe(gulp.dest(buildDir))
+})
+
+
+/**
+ * Build server entry point for production.
+ */
+gulp.task('build-server-production', ['clean-server'], () => {
+    process.env.NODE_ENV = 'production'
+
+    // build server
+    return gulp.src(serverEntry)
+        .pipe(named())
+        .pipe(webpack(require(webpackServerConfigPath)))
+        .pipe(gulp.dest(buildDir))
+})
+
+
+/**
+ * Remove all ouptut files from previous client builds.
+ */
+gulp.task('clean-client', () => {
+    del.sync(clientBuildGlob)
+})
+
+
+/**
+ * Remove all ouptut files from previous server builds.
+ */
+gulp.task('clean-server', () => {
+    del.sync(serverBuildGlob)
+})
