@@ -127,10 +127,20 @@ gulp.task('tdd', () => {
 /**
  * Build into a docker container
  */
-gulp.task('containerize',
-    ['clean-build', 'build-styles', 'build-client-production', 'build-server-production'],
+gulp.task('containerize', ['build-production'],
     shell.task('docker build -t mishkin .')
 )
+
+
+/**
+ * Build everything needed for production.
+ */
+gulp.task('build-production', [
+    'clean-build',
+    'build-styles',
+    'build-client-production',
+    'build-server-production'
+])
 
 
 /**
