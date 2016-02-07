@@ -4,6 +4,12 @@
     "browser": true,
     "node": true
   },
+  "plugins": [
+    "react"
+  ],
+  "globals": {
+    "ga": false
+  },
   "ecmaFeatures": {
     "arrowFunctions": true,
     "binaryLiterals": false,
@@ -153,8 +159,5 @@
     "valid-typeof": 2,
     "wrap-iife": [2, "inside"],
     "yoda": 2
-  },
-  "plugins": [
-    "react"
-  ]
+  }
 }
