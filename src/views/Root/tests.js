@@ -1,6 +1,6 @@
 // third party imports
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import $ from 'teaspoon'
 // local imports
 import Root from './index'
 
@@ -12,8 +12,8 @@ describe('Root', function () {
 
 
     beforeEach(function () {
-        root = TestUtils.renderIntoDocument(<Root />)
-        button = TestUtils.findRenderedDOMComponentWithTag(root, 'button')
+        root = $(<Root />).render()
+        button = root.find('button')
     })
 
 
@@ -24,25 +24,25 @@ describe('Root', function () {
 
     it('toggles between expanded and contracted states', function () {
         // click the button
-        TestUtils.Simulate.click(button)
+        button.trigger('click')
         // should be expanded now
         expect(root.state.isExpanded).to.be.true
         // click the button again
-        TestUtils.Simulate.click(button)
+        button.trigger('click')
         // should be contracted now
         expect(root.state.isExpanded).to.be.false
     })
 
 
     function testHeaderRender() {
-        const header = TestUtils.findRenderedDOMComponentWithTag(root, 'h1')
+        const header = root.find('h1')[0]
 
         expect(header.innerHTML).to.equal('The Mishkins')
     }
 
 
     function testSubheaderRender() {
-        const subheader = TestUtils.scryRenderedDOMComponentsWithTag(root, 'p')[0]
+        const subheader = root.find('p')[0]
 
         expect(subheader.innerHTML).to.equal('More than just a family.')
     }
@@ -59,7 +59,7 @@ describe('Root', function () {
 
 
         it('does not render additional text', function () {
-            const more = TestUtils.scryRenderedDOMComponentsWithTag(root, 'p')[1]
+            const more = root.find('p')[1]
 
             expect(more.style.opacity).to.equal('0')
         })
@@ -69,7 +69,7 @@ describe('Root', function () {
     describe('expanded', function () {
         beforeEach(function () {
             // click button
-            TestUtils.Simulate.click(button)
+            button.trigger('click')
         })
 
 
@@ -83,7 +83,7 @@ describe('Root', function () {
 
 
         it('renders additional text, with proper content', function () {
-            const more = TestUtils.scryRenderedDOMComponentsWithTag(root, 'p')[1]
+            const more = root.find('p')[1]
 
             expect(more.style.opacity).to.equal('1')
             expect(more.innerHTML).to.equal(
