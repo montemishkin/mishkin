@@ -29,7 +29,6 @@ module.exports = function (config) {
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
         frameworks: [
             'mocha',
-            'sinon-chai',
         ],
 
         // list of files / patterns to load in the browser
@@ -73,5 +72,15 @@ module.exports = function (config) {
             'Firefox',
             // 'Safari',
         ],
+
+        plugins: [
+            'karma-chrome-launcher',
+            'karma-firefox-launcher',
+            'karma-mocha',
+            'karma-mocha-reporter',
+            'karma-safari-launcher',
+            'karma-sourcemap-loader',
+            'karma-webpack',
+        ]
     })
 }

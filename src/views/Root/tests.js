@@ -1,6 +1,7 @@
 // third party imports
-import React from 'react'
 import $ from 'teaspoon'
+import {expect} from 'chai'
+import React from 'react'
 // local imports
 import Root from './index'
 
