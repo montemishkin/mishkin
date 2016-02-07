@@ -9,17 +9,19 @@ import Root from './index'
 describe('Root', function () {
     // to be set in `beforeEach`
     let root
+    let wrapped
     let button
 
 
     beforeEach(function () {
         root = $(<Root />).render()
+        wrapped = root.children().only()
         button = root.find('button')
     })
 
 
     it('starts out contracted', function () {
-        assert.isFalse(root.state().isExpanded)
+        assert.isFalse(wrapped.props().isExpanded)
     })
 
 
@@ -27,23 +29,23 @@ describe('Root', function () {
         // click the button
         button.trigger('click')
         // should be expanded now
-        assert.isTrue(root.state().isExpanded)
+        assert.isTrue(wrapped.props().isExpanded)
         // click the button again
         button.trigger('click')
         // should be contracted now
-        assert.isFalse(root.state().isExpanded)
+        assert.isFalse(wrapped.props().isExpanded)
         // click the button again
         button.trigger('click')
         // should be expanded now
-        assert.isTrue(root.state().isExpanded)
+        assert.isTrue(wrapped.props().isExpanded)
         // click the button again
         button.trigger('click')
         // should be contracted now
-        assert.isFalse(root.state().isExpanded)
+        assert.isFalse(wrapped.props().isExpanded)
         // click the button again
         button.trigger('click')
         // should be expanded now
-        assert.isTrue(root.state().isExpanded)
+        assert.isTrue(wrapped.props().isExpanded)
     })
 
 

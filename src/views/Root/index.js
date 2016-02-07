@@ -1,26 +1,15 @@
 // third party imports
-import React, {Component} from 'react'
+import React from 'react'
+import {withState} from 'recompose'
 import radium from 'radium'
 import Helmet from 'react-helmet'
 // local imports
 import styles from './styles'
 
 
-class Root extends Component {
-    constructor(...args) {
-        // instantiate `this`
-        super(...args)
-        // set initial state
-        this.state = {
-            isExpanded: false,
-        }
-    }
-
-
-    render() {
-        const {isExpanded} = this.state
-
-        return (<div style={styles.container}>
+function Root({isExpanded, setIsExpanded}) {
+    return (
+        <div style={styles.container}>
             <Helmet title='The Mishkins' />
             <h1 style={styles.header}>
                 The Mishkins
@@ -40,13 +29,18 @@ class Root extends Component {
             <button
                 type='button'
                 style={styles.button}
-                onClick={() => this.setState({isExpanded: !isExpanded})}
+                onClick={() => setIsExpanded(!isExpanded)}
             >
                 {isExpanded ? 'Learn Less' : 'Learn More'}
             </button>
-        </div>)
-    }
+        </div>
+    )
 }
 
 
-export default radium(Root)
+export default withState(
+    'isExpanded',
+    'setIsExpanded',
+    false,
+    radium(Root)
+)
