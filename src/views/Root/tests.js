@@ -19,7 +19,7 @@ describe('Root', function () {
 
 
     it('starts out contracted', function () {
-        assert.isFalse(root.state.isExpanded)
+        assert.isFalse(root.state().isExpanded)
     })
 
 
@@ -27,11 +27,11 @@ describe('Root', function () {
         // click the button
         button.trigger('click')
         // should be expanded now
-        assert.isTrue(root.state.isExpanded)
+        assert.isTrue(root.state().isExpanded)
         // click the button again
         button.trigger('click')
         // should be contracted now
-        assert.isFalse(root.state.isExpanded)
+        assert.isFalse(root.state().isExpanded)
     })
 
 
@@ -55,7 +55,7 @@ describe('Root', function () {
 
 
         it('renders button, with proper content', function () {
-            assert.equal(button.innerHTML, 'Learn More')
+            assert.equal(button[0].innerHTML, 'Learn More')
         })
 
 
@@ -79,7 +79,7 @@ describe('Root', function () {
 
 
         it('renders button, with proper content', function () {
-            assert.equal(button.innerHTML, 'Learn Less')
+            assert.equal(button[0].innerHTML, 'Learn Less')
         })
 
 
