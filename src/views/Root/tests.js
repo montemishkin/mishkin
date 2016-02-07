@@ -1,6 +1,6 @@
 // third party imports
 import $ from 'teaspoon'
-import {expect} from 'chai'
+import {assert} from 'chai'
 import React from 'react'
 // local imports
 import Root from './index'
@@ -19,7 +19,7 @@ describe('Root', function () {
 
 
     it('starts out contracted', function () {
-        expect(root.state.isExpanded).to.be.false
+        assert.isFalse(root.state.isExpanded)
     })
 
 
@@ -27,25 +27,25 @@ describe('Root', function () {
         // click the button
         button.trigger('click')
         // should be expanded now
-        expect(root.state.isExpanded).to.be.true
+        assert.isTrue(root.state.isExpanded)
         // click the button again
         button.trigger('click')
         // should be contracted now
-        expect(root.state.isExpanded).to.be.false
+        assert.isFalse(root.state.isExpanded)
     })
 
 
     function testHeaderRender() {
         const header = root.find('h1')[0]
 
-        expect(header.innerHTML).to.equal('The Mishkins')
+        assert.equal(header.innerHTML, 'The Mishkins')
     }
 
 
     function testSubheaderRender() {
         const subheader = root.find('p')[0]
 
-        expect(subheader.innerHTML).to.equal('More than just a family.')
+        assert.equal(subheader.innerHTML, 'More than just a family.')
     }
 
 
@@ -55,14 +55,14 @@ describe('Root', function () {
 
 
         it('renders button, with proper content', function () {
-            expect(button.innerHTML).to.equal('Learn More')
+            assert.equal(button.innerHTML, 'Learn More')
         })
 
 
         it('does not render additional text', function () {
             const more = root.find('p')[1]
 
-            expect(more.style.opacity).to.equal('0')
+            assert.equal(more.style.opacity, '0')
         })
     })
 
@@ -79,15 +79,16 @@ describe('Root', function () {
 
 
         it('renders button, with proper content', function () {
-            expect(button.innerHTML).to.equal('Learn Less')
+            assert.equal(button.innerHTML, 'Learn Less')
         })
 
 
         it('renders additional text, with proper content', function () {
             const more = root.find('p')[1]
 
-            expect(more.style.opacity).to.equal('1')
-            expect(more.innerHTML).to.equal(
+            assert.equal(more.style.opacity, '1')
+            assert.equal(
+                more.innerHTML,
                 'The Mishkins are a family, but they are also more.'
             )
         })
