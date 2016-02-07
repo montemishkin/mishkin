@@ -93,6 +93,3 @@ export default {
         opacity: 0,
     },
 }
-
-
-// end of file

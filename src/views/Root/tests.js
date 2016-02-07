@@ -49,16 +49,16 @@ describe('Root', function () {
 
 
     describe('contracted', function () {
-        it('renders the header, with proper content', testHeaderRender)
-        it('renders the subheader, with proper content', testSubheaderRender)
+        it('renders header, with proper content', testHeaderRender)
+        it('renders subheader, with proper content', testSubheaderRender)
 
 
-        it('renders the button, with proper content', function () {
+        it('renders button, with proper content', function () {
             expect(button.innerHTML).to.equal('Learn More')
         })
 
 
-        it('does not render the additional text', function () {
+        it('does not render additional text', function () {
             const more = TestUtils.scryRenderedDOMComponentsWithTag(root, 'p')[1]
 
             expect(more.style.opacity).to.equal('0')
@@ -68,21 +68,21 @@ describe('Root', function () {
 
     describe('expanded', function () {
         beforeEach(function () {
-            // click the button
+            // click button
             TestUtils.Simulate.click(button)
         })
 
 
-        it('renders the header, with proper content', testHeaderRender)
-        it('renders the subheader, with proper content', testSubheaderRender)
+        it('renders header, with proper content', testHeaderRender)
+        it('renders subheader, with proper content', testSubheaderRender)
 
 
-        it('renders the button, with proper content', function () {
+        it('renders button, with proper content', function () {
             expect(button.innerHTML).to.equal('Learn Less')
         })
 
 
-        it('renders the additional text, with proper content', function () {
+        it('renders additional text, with proper content', function () {
             const more = TestUtils.scryRenderedDOMComponentsWithTag(root, 'p')[1]
 
             expect(more.style.opacity).to.equal('1')
@@ -92,6 +92,3 @@ describe('Root', function () {
         })
     })
 })
-
-
-// end of file

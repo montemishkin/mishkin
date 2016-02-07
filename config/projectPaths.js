@@ -7,6 +7,7 @@
 var path = require('path')
 
 
+// directories
 var rootDir = path.join(__dirname, '..')
 var configDir = path.join(rootDir, 'config')
 var buildDir = path.join(rootDir, 'build')
@@ -14,8 +15,10 @@ var sourceDir = path.join(rootDir, 'src')
 var assetsDir = path.join(sourceDir, 'assets')
 var templatesDir = path.join(sourceDir, 'templates')
 var webpackDir = path.join(configDir, 'webpack')
+// entry points
 var clientEntry = path.join(sourceDir, 'client.js')
 var serverEntry = path.join(sourceDir, 'index.js')
+// built files
 var clientBuild = path.join(buildDir, path.basename(clientEntry))
 var serverBuild = path.join(buildDir, path.basename(serverEntry))
 

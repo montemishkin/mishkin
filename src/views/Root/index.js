@@ -1,13 +1,12 @@
 // third party imports
-import React from 'react'
+import React, {Component} from 'react'
 import radium from 'radium'
 import Helmet from 'react-helmet'
 // local imports
 import styles from './styles'
 
 
-@radium
-export default class Root extends React.Component {
+class Root extends Component {
     constructor(...args) {
         // instantiate `this`
         super(...args)
@@ -48,3 +47,6 @@ export default class Root extends React.Component {
         </div>)
     }
 }
+
+
+export default radium(Root)

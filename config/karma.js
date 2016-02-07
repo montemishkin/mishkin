@@ -6,15 +6,17 @@
 
 // local imports
 var projectPaths = require('./projectPaths')
+// TODO: do you want base config here? or client, server, or tests config?
 var webpackBaseConfig = require(projectPaths.webpackBaseConfig)
 
-
-// annoying hack to be able to dynamically set keys on object
-var preprocessors = {}
 // stay sane people
 if (typeof projectPaths.testsGlob === 'undefined') {
     throw new Error('Hey.  Where\'s the tests glob?')
 }
+
+
+// annoying hack to be able to dynamically set keys on object
+var preprocessors = {}
 preprocessors[projectPaths.testsGlob] = ['webpack', 'sourcemap']
 
 
@@ -73,6 +75,3 @@ module.exports = function (config) {
         ],
     })
 }
-
-
-// end of file
