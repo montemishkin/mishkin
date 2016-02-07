@@ -32,6 +32,18 @@ describe('Root', function () {
         button.trigger('click')
         // should be contracted now
         assert.isFalse(root.state().isExpanded)
+        // click the button again
+        button.trigger('click')
+        // should be expanded now
+        assert.isTrue(root.state().isExpanded)
+        // click the button again
+        button.trigger('click')
+        // should be contracted now
+        assert.isFalse(root.state().isExpanded)
+        // click the button again
+        button.trigger('click')
+        // should be expanded now
+        assert.isTrue(root.state().isExpanded)
     })
 
 
