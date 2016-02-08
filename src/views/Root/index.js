@@ -10,11 +10,11 @@ import styles from './styles'
 
 
 function Root({isExpanded, setIsExpanded, browser}) {
-    const headerStyle = browser.greaterThan.medium
-        ? styles.headerInfinity
-        : browser.greaterThan.small
+    const headerStyle = browser.lessThan.medium
+        ? styles.headerSmall
+        : browser.lessThan.infinity
             ? styles.headerMedium
-            : styles.headerSmall
+            : styles.headerInfinity
 
     return (
         <div style={styles.container}>
