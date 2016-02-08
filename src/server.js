@@ -30,7 +30,7 @@ server.set('views', templatesDir)
 // compress responses
 server.use(compression())
 // log requests
-server.use(logger('dev'))
+server.use(logger(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'))
 
 
 /* Routing */
