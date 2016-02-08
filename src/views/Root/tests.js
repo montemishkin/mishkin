@@ -2,8 +2,14 @@
 import $ from 'teaspoon'
 import {assert} from 'chai'
 import React from 'react'
+import {Provider} from 'react-redux'
 // local imports
-import Root from './index'
+import Root from 'views/Root'
+import {createStore} from 'store'
+
+
+// turn off redux logger
+process.env.REDUX_LOGGER = 'off'
 
 
 describe('Root', function () {
@@ -14,8 +20,14 @@ describe('Root', function () {
 
 
     beforeEach(function () {
-        root = $(<Root />).render()
-        wrapped = root.children().only()
+        const tree = $(
+            <Provider store={createStore()}>
+                <Root />
+            </Provider>
+        ).render()
+        root = tree.find(Root).only()
+        // go down two levels of wrapper components
+        wrapped = root.children().only().children().only()
         button = root.find('button')
     })
 

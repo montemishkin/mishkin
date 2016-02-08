@@ -10,6 +10,8 @@ const middlewares = []
 
 if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
     middlewares.push(createLogger({
+        // allows one to disable logging (such as during testing)
+        predicate: () => process.env.REDUX_LOGGER !== 'off',
         // always collapse console groups
         collapsed: () => true,
     }))
@@ -26,7 +28,3 @@ export function createStore(initialState) {
         )
     )
 }
-
-
-// export a store with no initial data
-export default createStore()
