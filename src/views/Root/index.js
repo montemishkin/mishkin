@@ -3,15 +3,23 @@ import React from 'react'
 import {withState} from 'recompose'
 import radium from 'radium'
 import Helmet from 'react-helmet'
+import {connect} from 'react-redux'
+import {compose} from 'redux'
 // local imports
 import styles from './styles'
 
 
-function Root({isExpanded, setIsExpanded}) {
+function Root({isExpanded, setIsExpanded, browser}) {
+    const headerStyle = browser.greaterThan.medium
+        ? styles.headerInfinity
+        : browser.greaterThan.small
+            ? styles.headerMedium
+            : styles.headerSmall
+
     return (
         <div style={styles.container}>
             <Helmet title='The Mishkins' />
-            <h1 style={styles.header}>
+            <h1 style={headerStyle}>
                 The Mishkins
             </h1>
             <p style={styles.subheader}>
@@ -38,9 +46,8 @@ function Root({isExpanded, setIsExpanded}) {
 }
 
 
-export default withState(
-    'isExpanded',
-    'setIsExpanded',
-    false,
-    radium(Root)
-)
+export default compose(
+    connect(({browser}) => ({browser})),
+    withState('isExpanded', 'setIsExpanded', false),
+    radium
+)(Root)

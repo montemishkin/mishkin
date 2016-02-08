@@ -21,6 +21,13 @@ const opacityTransition = {
     transitionProperty: 'opacity',
 }
 
+// base styling common to medium and infinity header styles
+const headerBase = {
+    margin: 0,
+    fontWeight: 'normal',
+    textAlign: 'center',
+}
+
 
 export default {
     container: {
@@ -31,7 +38,7 @@ export default {
 
         boxSizing: 'border-box',
         minHeight: '100%',
-        padding: 100,
+        padding: '8%',
 
         backgroundColor: 'black',
         // black-paper pattern graciously provided by subtlepatterns.com
@@ -41,11 +48,21 @@ export default {
     },
 
 
-    header: {
-        margin: 0,
+    headerInfinity: {
+        ...headerBase,
         fontSize: 80,
-        fontWeight: 'normal',
-        textAlign: 'center',
+    },
+
+
+    headerMedium: {
+        ...headerBase,
+        fontSize: 60,
+    },
+
+
+    headerSmall: {
+        ...headerBase,
+        fontSize: 40,
     },
 
 
