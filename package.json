@@ -53,6 +53,7 @@
     "recompose": "^0.15.0",
     "redux": "^3.3.1",
     "redux-responsive": "^1.0.2",
+    "serve-favicon": "^2.3.0",
     "serve-static": "^1.10.2"
   }
 }

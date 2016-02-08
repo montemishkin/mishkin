@@ -4,13 +4,19 @@ import 'babel-core/polyfill'
 import express from 'express'
 import compression from 'compression'
 import logger from 'morgan'
+import favicon from 'serve-favicon'
 import serveStatic from 'serve-static'
 import React from 'react'
 import {Provider} from 'react-redux'
 import {renderToString} from 'react-dom/server'
 import Helmet from 'react-helmet'
 // local imports
-import {buildDir, assetsDir, templatesDir} from 'config/projectPaths'
+import {
+    buildDir,
+    assetsDir,
+    templatesDir,
+    favicon as faviconPath,
+} from 'config/projectPaths'
 import Root from 'views/Root'
 import {createStore} from 'store'
 
@@ -31,6 +37,8 @@ server.set('views', templatesDir)
 server.use(compression())
 // log requests
 server.use(logger(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'))
+// serve favicon
+server.use(favicon(faviconPath))
 
 
 /* Routing */
