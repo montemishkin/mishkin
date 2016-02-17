@@ -1,3 +1,7 @@
+// third party imports
+import {StyleSheet} from 'aphrodite'
+
+
 // common styling for small font
 const smallFont = {
     fontSize: 20,
@@ -29,7 +33,7 @@ const headerBase = {
 }
 
 
-export default {
+export default StyleSheet.create({
     container: {
         display: 'flex',
         flexDirection: 'column',
@@ -109,4 +113,4 @@ export default {
         ...opacityTransition,
         opacity: 0,
     },
-}
+})

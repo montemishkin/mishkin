@@ -40,12 +40,12 @@
     "webpack-stream": "^2.1.1"
   },
   "dependencies": {
+    "aphrodite": "^0.1.2",
     "compression": "^1.6.1",
     "express": "^4.13.4",
     "jade": "^1.11.0",
     "morgan": "^1.6.1",
     "normalize.css": "^3.0.3",
-    "radium": "^0.15.3",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-helmet": "^2.3.1",

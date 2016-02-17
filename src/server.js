@@ -9,6 +9,7 @@ import serveStatic from 'serve-static'
 import React from 'react'
 import {Provider} from 'react-redux'
 import {renderToString} from 'react-dom/server'
+import {StyleSheetServer} from 'aphrodite'
 import Helmet from 'react-helmet'
 // local imports
 import {
@@ -48,25 +49,20 @@ server.use('/static', serveStatic(buildDir), serveStatic(assetsDir))
 // any url that hits this server
 server.all('*', (req, res) => {
     const store = createStore()
-    const renderedComponent = renderToString(
+    const {html, css} = StyleSheetServer.renderStatic(() => renderToString(
         <Provider store={store}>
-            <Root
-                radiumConfig={{
-                    userAgent: req.headers['user-agent'],
-                }}
-            />
+            <Root />
         </Provider>
-    )
-
-    const initialState = JSON.stringify(store.getState())
+    ))
 
     // see: https://github.com/nfl/react-helmet#server-usage
     Helmet.rewind()
 
-    // render the jade template with the rendered component mounted
     res.render('index.jade', {
-        initialState,
-        renderedComponent,
+        initialState: JSON.stringify(store.getState()),
+        renderedComponent: html,
+        renderedClassNames: JSON.stringify(css.renderedClassNames),
+        css: css.content,
     })
 })
 

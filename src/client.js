@@ -4,6 +4,7 @@ import 'babel-core/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
+import {StyleSheet} from 'aphrodite'
 // local imports
 import Root from 'views/Root'
 import {createStore} from 'store'
@@ -34,6 +35,11 @@ ga('send', 'pageview')
 const initialState = window.__INITIAL_STATE__
 // instantiate client store with initial application state
 const store = createStore(initialState)
+
+// grab rendered css class names passed from server
+const renderedClassNames = window.__RENDERED_CLASS_NAMES__
+// rehydrate stylesheet with already rendered css class names
+StyleSheet.rehydrate(renderedClassNames)
 
 
 // render application to dom

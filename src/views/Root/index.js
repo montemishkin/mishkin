@@ -1,7 +1,7 @@
 // third party imports
 import React from 'react'
 import {withState} from 'recompose'
-import radium from 'radium'
+import {css} from 'aphrodite'
 import Helmet from 'react-helmet'
 import {connect} from 'react-redux'
 import {compose} from 'redux'
@@ -17,26 +17,26 @@ function Root({isExpanded, setIsExpanded, browser}) {
             : styles.headerInfinity
 
     return (
-        <div style={styles.container}>
+        <div className={css(styles.container)}>
             <Helmet title='The Mishkins' />
-            <h1 style={headerStyle}>
+            <h1 className={css(headerStyle)}>
                 The Mishkins
             </h1>
-            <p style={styles.subheader}>
+            <p className={css(styles.subheader)}>
                 More than just a family.
             </p>
             <p
-                style={[
+                className={css(
                     styles.moreText,
                     isExpanded && styles.fadeIn,
-                    !isExpanded && styles.fadeOut,
-                ]}
+                    !isExpanded && styles.fadeOut
+                )}
             >
                 The Mishkins are a family, but they are also more.
             </p>
             <button
                 type='button'
-                style={styles.button}
+                className={css(styles.button)}
                 onClick={() => setIsExpanded(!isExpanded)}
             >
                 {isExpanded ? 'Learn Less' : 'Learn More'}
@@ -48,6 +48,5 @@ function Root({isExpanded, setIsExpanded, browser}) {
 
 export default compose(
     connect(({browser}) => ({browser})),
-    withState('isExpanded', 'setIsExpanded', false),
-    radium
+    withState('isExpanded', 'setIsExpanded', false)
 )(Root)
