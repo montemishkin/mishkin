@@ -16,6 +16,10 @@ function Root({isExpanded, setIsExpanded, browser}) {
             ? styles.headerMedium
             : styles.headerInfinity
 
+    // inject `moreText` + `fadeIn` styles regardless of whether expanded or not
+    // (to avoid jitter when waiting for injection on first expansion)
+    css(styles.moreText, styles.fadeIn)
+
     return (
         <div className={css(styles.container)}>
             <Helmet title='The Mishkins' />
@@ -29,7 +33,6 @@ function Root({isExpanded, setIsExpanded, browser}) {
                 className={css(
                     styles.moreText,
                     isExpanded && styles.fadeIn,
-                    !isExpanded && styles.fadeOut
                 )}
             >
                 The Mishkins are a family, but they are also more.

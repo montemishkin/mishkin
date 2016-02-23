@@ -78,12 +78,19 @@ export default StyleSheet.create({
 
 
     moreText: {
+        ...opacityTransition,
         ...smallFont,
         marginTop: 15,
         marginRight: 0,
         marginBottom: 0,
         marginLeft: 0,
         textAlign: 'center',
+        opacity: 0,
+    },
+
+
+    fadeIn: {
+        opacity: 1,
     },
 
 
@@ -100,17 +107,5 @@ export default StyleSheet.create({
         ':hover': {
             backgroundColor: '#2361A6',
         },
-    },
-
-
-    fadeIn: {
-        ...opacityTransition,
-        opacity: 1,
-    },
-
-
-    fadeOut: {
-        ...opacityTransition,
-        opacity: 0,
     },
 })
