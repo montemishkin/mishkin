@@ -1,12 +1,12 @@
 // third party imports
 import React from 'react'
 import {withState} from 'recompose'
-import {css} from 'aphrodite'
 import Helmet from 'react-helmet'
 import {connect} from 'react-redux'
 import {compose} from 'redux'
+import classnames from 'classnames'
 // local imports
-import styles from './styles'
+import styles from './styles.css'
 
 
 function Root({isExpanded, setIsExpanded, browser}) {
@@ -16,21 +16,17 @@ function Root({isExpanded, setIsExpanded, browser}) {
             ? styles.headerMedium
             : styles.headerInfinity
 
-    // inject `moreText` + `fadeIn` styles regardless of whether expanded or not
-    // (to avoid jitter when waiting for injection on first expansion)
-    css(styles.moreText, styles.fadeIn)
-
     return (
-        <div className={css(styles.container)}>
+        <div className={styles.container}>
             <Helmet title='The Mishkins' />
-            <h1 className={css(headerStyle)}>
+            <h1 className={headerStyle}>
                 The Mishkins
             </h1>
-            <p className={css(styles.subheader)}>
+            <p className={styles.subheader}>
                 More than just a family.
             </p>
             <p
-                className={css(
+                className={classnames(
                     styles.moreText,
                     isExpanded && styles.fadeIn,
                 )}
@@ -39,7 +35,7 @@ function Root({isExpanded, setIsExpanded, browser}) {
             </p>
             <button
                 type='button'
-                className={css(styles.button)}
+                className={styles.button}
                 onClick={() => setIsExpanded(!isExpanded)}
             >
                 {isExpanded ? 'Learn Less' : 'Learn More'}

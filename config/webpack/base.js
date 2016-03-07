@@ -1,5 +1,6 @@
 // third party imports
 var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 // local imports
 var projectPaths = require('../projectPaths')
 var babelConfig = require(projectPaths.babelConfig)
@@ -7,7 +8,9 @@ var babelConfig = require(projectPaths.babelConfig)
 
 // default to using development configuration
 var devtool = 'source-map'
-var plugins = []
+var plugins = [
+    new ExtractTextPlugin('styles.bundle.css'),
+]
 // if we are in production environment
 if (process.env.NODE_ENV === 'production') {
     // use production configuration instead
@@ -39,7 +42,11 @@ module.exports = {
                 loader: 'babel',
                 include: projectPaths.sourceDir,
                 query: babelConfig,
-            },
+            }, {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract('style', 'css?modules'),
+                include: projectPaths.sourceDir,
+            }
         ],
     },
     resolve: {

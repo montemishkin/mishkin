@@ -1,0 +1,117 @@
+/* common styling for small font */
+.smallFont {
+    font-size: 20px;
+}
+
+
+/* transition parameters common to all transition styles */
+.transitionParameters {
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+
+/* background color transition class */
+.backgroundColorTransition {
+    composes: transitionParameters;
+
+    transition-property: background-color;
+}
+
+
+/* opacity transition class */
+.opacityTransition {
+    composes: transitionParameters;
+
+    transition-property: opacity;
+}
+
+
+/* base styling common to medium and infinity header styles */
+.headerBase {
+    margin: 0;
+    font-weight: normal;
+    text-align: center;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    min-height: 100%;
+    padding: 8%;
+
+    background-color: black;
+    /* black-paper pattern graciously provided by subtlepatterns.com */
+    background-image: url(/static/images/black-paper.png);
+    color: white;
+    font-family: courier, monospace;
+}
+
+
+.headerInfinity {
+    composes: headerBase;
+
+    font-size: 80px;
+}
+
+
+.headerMedium {
+    composes: headerBase;
+
+    font-size: 60px;
+}
+
+
+.headerSmall {
+    composes: headerBase;
+
+    font-size: 40px;
+}
+
+
+.subheader {
+    composes: smallFont;
+
+    margin: 0;
+    text-align: center;
+}
+
+
+.moreText {
+    composes: opacityTransition;
+    composes: smallFont;
+
+    margin-top: 15px;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    text-align: center;
+    opacity: 0;
+}
+
+
+.fadeIn {
+    opacity: 1;
+}
+
+
+.button {
+    composes: backgroundColorTransition;
+    composes: smallFont;
+
+    margin-top: 20px;
+    border-width: 0;
+    border-radius: 10px;
+    outline: 0;
+    padding: 20px;
+    background-color: #135196;
+}
+
+.button:hover {
+    background-color: #2361A6;
+}
