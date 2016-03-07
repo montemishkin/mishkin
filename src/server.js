@@ -10,7 +10,7 @@ import Helmet from 'react-helmet'
 // local imports
 import {
     buildDir,
-    assetsDir,
+    publicDir,
     favicon as faviconPath,
 } from 'config/projectPaths'
 import Root from 'views/Root'
@@ -32,8 +32,8 @@ server.use(favicon(faviconPath))
 
 /* Routing */
 
-// route static files to build and assets dirs
-server.use('/static', serveStatic(buildDir), serveStatic(assetsDir))
+// route static files to build and public dirs
+server.use('/static', serveStatic(buildDir), serveStatic(publicDir))
 // any url that hits this server
 server.all('*', (req, res) => {
     const renderedComponent = renderToString(<Root />)

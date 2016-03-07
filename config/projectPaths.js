@@ -12,7 +12,7 @@ var rootDir = path.join(__dirname, '..')
 var configDir = path.join(rootDir, 'config')
 var buildDir = path.join(rootDir, 'build')
 var sourceDir = path.join(rootDir, 'src')
-var assetsDir = path.join(sourceDir, 'assets')
+var publicDir = path.join(sourceDir, 'public')
 var webpackDir = path.join(configDir, 'webpack')
 // entry points
 var clientEntry = path.join(sourceDir, 'client.js')
@@ -27,7 +27,7 @@ module.exports = {
     rootDir: rootDir,
     sourceDir: sourceDir,
     buildDir: buildDir,
-    assetsDir: assetsDir,
+    publicDir: publicDir,
     // entry points
     clientEntry: clientEntry,
     serverEntry: serverEntry,
@@ -37,7 +37,7 @@ module.exports = {
     // globs
     clientBuildGlob: path.join(clientBuild, '*'),
     serverBuildGlob: path.join(serverBuild, '*'),
-    cssGlob: path.join(assetsDir, 'styles', 'css', '*'),
+    cssGlob: path.join(sourceDir, 'styles', 'css', '*'),
     testsGlob: path.join(sourceDir, '**', 'tests.js'),
     // configuration files
     eslintConfig: path.join(configDir, 'eslint.json'),
@@ -47,5 +47,5 @@ module.exports = {
     webpackClientConfig: path.join(webpackDir, 'client.js'),
     webpackServerConfig: path.join(webpackDir, 'server.js'),
     // favicon
-    favicon: path.join(assetsDir, 'images', 'favicon.png')
+    favicon: path.join(publicDir, 'images', 'favicon.png')
 }
