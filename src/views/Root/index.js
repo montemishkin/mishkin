@@ -2,24 +2,16 @@
 import React from 'react'
 import {withState} from 'recompose'
 import Helmet from 'react-helmet'
-import {connect} from 'react-redux'
-import {compose} from 'redux'
 import classnames from 'classnames'
 // local imports
 import styles from './styles.css'
 
 
-function Root({isExpanded, setIsExpanded, browser}) {
-    const headerStyle = browser.lessThan.medium
-        ? styles.headerSmall
-        : browser.lessThan.infinity
-            ? styles.headerMedium
-            : styles.headerInfinity
-
+function Root({isExpanded, setIsExpanded}) {
     return (
         <div className={styles.container}>
             <Helmet title='The Mishkins' />
-            <h1 className={headerStyle}>
+            <h1 className={styles.header}>
                 The Mishkins
             </h1>
             <p className={styles.subheader}>
@@ -45,7 +37,8 @@ function Root({isExpanded, setIsExpanded, browser}) {
 }
 
 
-export default compose(
-    connect(({browser}) => ({browser})),
-    withState('isExpanded', 'setIsExpanded', false)
+export default withState(
+    'isExpanded',
+    'setIsExpanded',
+    false
 )(Root)

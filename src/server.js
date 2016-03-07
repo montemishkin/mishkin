@@ -5,7 +5,6 @@ import logger from 'morgan'
 import favicon from 'serve-favicon'
 import serveStatic from 'serve-static'
 import React from 'react'
-import {Provider} from 'react-redux'
 import {renderToString} from 'react-dom/server'
 import Helmet from 'react-helmet'
 // local imports
@@ -16,7 +15,6 @@ import {
     favicon as faviconPath,
 } from 'config/projectPaths'
 import Root from 'views/Root'
-import {createStore} from 'store'
 
 
 const server = express()
@@ -45,18 +43,12 @@ server.use(favicon(faviconPath))
 server.use('/static', serveStatic(buildDir), serveStatic(assetsDir))
 // any url that hits this server
 server.all('*', (req, res) => {
-    const store = createStore()
-    const renderedComponent = renderToString(
-        <Provider store={store}>
-            <Root />
-        </Provider>
-    )
+    const renderedComponent = renderToString(<Root />)
 
     // see: https://github.com/nfl/react-helmet#server-usage
     Helmet.rewind()
 
     res.render('index.jade', {
-        initialState: JSON.stringify(store.getState()),
         renderedComponent,
     })
 })

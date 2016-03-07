@@ -3,10 +3,8 @@ import 'babel-polyfill'
 // third party imports
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Provider} from 'react-redux'
 // local imports
 import Root from 'views/Root'
-import {createStore} from 'store'
 
 
 if (process.env.NODE_ENV === 'production') {
@@ -30,16 +28,8 @@ if (process.env.NODE_ENV === 'production') {
 ga('send', 'pageview')
 
 
-// grab initial application state passed from server
-const initialState = window.__INITIAL_STATE__
-// instantiate client store with initial application state
-const store = createStore(initialState)
-
-
 // render application to dom
 ReactDOM.render(
-    <Provider store={store}>
-        <Root />
-    </Provider>,
+    <Root />,
     document.getElementById('app')
 )

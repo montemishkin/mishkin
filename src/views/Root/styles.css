@@ -27,11 +27,27 @@
 }
 
 
-/* base styling common to medium and infinity header styles */
-.headerBase {
+.header {
     margin: 0;
     font-weight: normal;
     text-align: center;
+    font-size: 40px;
+}
+
+
+/* >= medium devices */
+@media (min-width: 400px) {
+    .header {
+        font-size: 60px;
+    }
+}
+
+
+/* large devices only */
+@media (min-width: 700px) {
+    .header {
+        font-size: 80px;
+    }
 }
 
 
@@ -53,25 +69,6 @@
 }
 
 
-.headerInfinity {
-    composes: headerBase;
-
-    font-size: 80px;
-}
-
-
-.headerMedium {
-    composes: headerBase;
-
-    font-size: 60px;
-}
-
-
-.headerSmall {
-    composes: headerBase;
-
-    font-size: 40px;
-}
 
 
 .subheader {

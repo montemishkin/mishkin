@@ -55,10 +55,7 @@
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-helmet": "^2.3.1",
-    "react-redux": "^4.4.0",
     "recompose": "^0.15.0",
-    "redux": "^3.3.1",
-    "redux-responsive": "^1.0.2",
     "serve-favicon": "^2.3.0",
     "serve-static": "^1.10.2"
   }
