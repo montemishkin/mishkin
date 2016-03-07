@@ -48,7 +48,6 @@
     "babel-polyfill": "^6.5.0",
     "compression": "^1.6.1",
     "express": "^4.13.4",
-    "jade": "^1.11.0",
     "morgan": "^1.6.1",
     "normalize.css": "^3.0.3",
     "react": "^0.14.7",

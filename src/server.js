@@ -11,23 +11,16 @@ import Helmet from 'react-helmet'
 import {
     buildDir,
     assetsDir,
-    templatesDir,
     favicon as faviconPath,
 } from 'config/projectPaths'
 import Root from 'views/Root'
+import renderTemplate from 'templates/index'
 
 
 const server = express()
 
 
-/* Application-wide Settings */
-
-// use jade as the templating engine
-server.set('view engine', 'jade')
-server.set('views', templatesDir)
-
-
-/* Application-wide Middleware */
+/* Server-wide Middleware */
 
 // compress responses
 server.use(compression())
@@ -46,11 +39,14 @@ server.all('*', (req, res) => {
     const renderedComponent = renderToString(<Root />)
 
     // see: https://github.com/nfl/react-helmet#server-usage
-    Helmet.rewind()
+    const helmet = Helmet.rewind()
 
-    res.render('index.jade', {
+    const html = renderTemplate({
         renderedComponent,
+        title: helmet.title,
     })
+
+    res.send(html)
 })
 
 
