@@ -92,7 +92,9 @@
 }
 
 
-.fadeIn {
+.moreTextVisible {
+    composes: moreText;
+
     opacity: 1;
 }
 

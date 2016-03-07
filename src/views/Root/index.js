@@ -1,44 +1,56 @@
 // third party imports
 import React from 'react'
-import {withState} from 'recompose'
 import Helmet from 'react-helmet'
-import classnames from 'classnames'
 // local imports
 import styles from './styles.css'
 
 
-function Root({isExpanded, setIsExpanded}) {
-    return (
-        <div className={styles.container}>
-            <Helmet title='The Mishkins' />
-            <h1 className={styles.header}>
-                The Mishkins
-            </h1>
-            <p className={styles.subheader}>
-                More than just a family.
-            </p>
-            <p
-                className={classnames(
-                    styles.moreText,
-                    isExpanded && styles.fadeIn,
-                )}
-            >
-                The Mishkins are a family, but they are also more.
-            </p>
-            <button
-                type='button'
-                className={styles.button}
-                onClick={() => setIsExpanded(!isExpanded)}
-            >
-                {isExpanded ? 'Learn Less' : 'Learn More'}
-            </button>
-        </div>
-    )
+class Root extends React.Component {
+    constructor(...args) {
+        super(...args)
+        this.state = {
+            isExpanded: false,
+        }
+    }
+
+
+    toggleExpanded = () => this.setState({isExpanded: !this.state.isExpanded})
+
+
+    render() {
+        const {
+            state: {isExpanded},
+            toggleExpanded,
+        } = this
+
+        return (
+            <div className={styles.container}>
+                <Helmet title='The Mishkins' />
+                <h1 className={styles.header}>
+                    The Mishkins
+                </h1>
+                <p className={styles.subheader}>
+                    More than just a family.
+                </p>
+                <p
+                    className={isExpanded
+                        ? styles.moreTextVisible
+                        : styles.moreText
+                    }
+                >
+                    The Mishkins are a family, but they are also more.
+                </p>
+                <button
+                    type='button'
+                    className={styles.button}
+                    onClick={toggleExpanded}
+                >
+                    {isExpanded ? 'Learn Less' : 'Learn More'}
+                </button>
+            </div>
+        )
+    }
 }
 
 
-export default withState(
-    'isExpanded',
-    'setIsExpanded',
-    false
-)(Root)
+export default Root
