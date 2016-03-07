@@ -34,10 +34,10 @@ module.exports = {
     // built files
     clientBuild: clientBuild,
     serverBuild: serverBuild,
+    cssBuild: path.join(buildDir, 'styles.css'),
     // globs
     clientBuildGlob: path.join(clientBuild, '*'),
     serverBuildGlob: path.join(serverBuild, '*'),
-    cssGlob: path.join(sourceDir, 'styles', 'css', '*'),
     testsGlob: path.join(sourceDir, '**', 'tests.js'),
     // configuration files
     eslintConfig: path.join(configDir, 'eslint.json'),
