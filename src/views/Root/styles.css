@@ -1,43 +1,19 @@
-/* common styling for small font */
 .smallFont {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 
-/* transition parameters common to all transition styles */
-.transitionParameters {
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
-}
-
-
-/* background color transition class */
-.backgroundColorTransition {
-    composes: transitionParameters;
-
-    transition-property: background-color;
-}
-
-
-/* opacity transition class */
-.opacityTransition {
-    composes: transitionParameters;
-
-    transition-property: opacity;
-}
-
-
-.header {
-    margin: 0;
-    font-weight: normal;
-    text-align: center;
+.largeFont {
     font-size: 40px;
 }
 
 
 /* >= medium devices */
-@media (min-width: 400px) {
-    .header {
+@media (min-width: 520px) {
+    .smallFont {
+        font-size: 20px;
+    }
+    .largeFont {
         font-size: 60px;
     }
 }
@@ -45,9 +21,19 @@
 
 /* large devices only */
 @media (min-width: 700px) {
-    .header {
+    .smallFont {
+        font-size: 25px;
+    }
+    .largeFont {
         font-size: 80px;
     }
+}
+
+
+/* transition parameters common to all transition styles */
+.transitionParameters {
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
 }
 
 
@@ -69,6 +55,13 @@
 }
 
 
+.header {
+    composes: largeFont;
+
+    margin: 0;
+    font-weight: normal;
+    text-align: center;
+}
 
 
 .subheader {
@@ -80,9 +73,10 @@
 
 
 .moreText {
-    composes: opacityTransition;
+    composes: transitionParameters;
     composes: smallFont;
 
+    transition-property: opacity;
     margin-top: 15px;
     margin-right: 0;
     margin-bottom: 0;
@@ -100,9 +94,10 @@
 
 
 .button {
-    composes: backgroundColorTransition;
+    composes: transitionParameters;
     composes: smallFont;
 
+    transition-property: background-color;
     margin-top: 20px;
     border-width: 0;
     border-radius: 10px;
@@ -110,6 +105,7 @@
     padding: 20px;
     background-color: #135196;
 }
+
 
 .button:hover {
     background-color: #2361A6;
