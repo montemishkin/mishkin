@@ -6,7 +6,6 @@ export default function renderTemplate({title, renderedComponent}) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/static/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="/static/styles.css">
-    <link rel="stylesheet" href="/static/styles.bundle.css">
   </head>
   <body>
     <div id="app">${renderedComponent}</div>

@@ -28,6 +28,11 @@ if (process.env.NODE_ENV === 'production') {
 ga('send', 'pageview')
 
 
+// apply global styles
+import 'styles/css/normalize.css'
+import 'styles/css/main.css'
+
+
 // render application to dom
 ReactDOM.render(
     <Root />,

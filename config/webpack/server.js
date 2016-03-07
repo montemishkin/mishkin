@@ -2,6 +2,7 @@
 var fs = require('fs')
 // third party imports
 var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var assign = require('lodash/object/assign')
 // local imports
 var projectPaths = require('../projectPaths')
@@ -26,6 +27,7 @@ var nodeModules = fs.readdirSync('node_modules')
 
 // extend base configuration's plugins
 var plugins = baseConfig.plugins.concat(
+    new ExtractTextPlugin('trash.css'),
     // add source map support
     new webpack.BannerPlugin(
         'require("source-map-support").install();',

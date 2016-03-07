@@ -8,9 +8,7 @@ var babelConfig = require(projectPaths.babelConfig)
 
 // default to using development configuration
 var devtool = 'source-map'
-var plugins = [
-    new ExtractTextPlugin('styles.bundle.css'),
-]
+var plugins = []
 // if we are in production environment
 if (process.env.NODE_ENV === 'production') {
     // use production configuration instead

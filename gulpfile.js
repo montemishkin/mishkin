@@ -3,11 +3,7 @@ var gulp = require('gulp')
 var del = require('del')
 var webpack = require('webpack-stream')
 var named = require('vinyl-named')
-var minifyCSS = require('gulp-minify-css')
-var concat = require('gulp-concat')
 var karma = require('karma')
-var autoprefixer = require('autoprefixer')
-var postcss = require('gulp-postcss')
 var nodemon = require('gulp-nodemon')
 var shell = require('gulp-shell')
 // local imports
@@ -19,7 +15,6 @@ var clientBuildGlob = projectPaths.clientBuildGlob
 var serverBuildGlob = projectPaths.serverBuildGlob
 var clientEntry = projectPaths.clientEntry
 var serverEntry = projectPaths.serverEntry
-var cssGlob = projectPaths.cssGlob
 var webpackClientConfigPath = projectPaths.webpackClientConfig
 var webpackServerConfigPath = projectPaths.webpackServerConfig
 var karmaConfigPath = projectPaths.karmaConfig
@@ -31,7 +26,6 @@ var karmaConfigPath = projectPaths.karmaConfig
 gulp.task('default', [
     'watch-server',
     'watch-client',
-    'watch-styles',
     'runserver'
 ])
 
@@ -77,30 +71,6 @@ gulp.task('watch-server', ['clean-server'], function () {
 
 
 /**
- * Watch styles only. Rebuild on change.
- */
-gulp.task('watch-styles', ['build-styles'], function () {
-    gulp.watch(cssGlob, ['build-styles'])
-})
-
-
-/**
- * Build styles only.
- */
-gulp.task('build-styles', function () {
-    return gulp.src(cssGlob)
-        .pipe(postcss([
-            autoprefixer({
-                browsers: ['last 2 versions'],
-            }),
-        ]))
-        .pipe(concat('styles.css'))
-        .pipe(minifyCSS())
-        .pipe(gulp.dest(buildDir))
-})
-
-
-/**
  * Run the test suite once.
  */
 gulp.task('test', function (cb) {
@@ -138,7 +108,6 @@ gulp.task('containerize', ['build-production'],
  */
 gulp.task('build-production', [
     'clean-build',
-    'build-styles',
     'build-client-production',
     'build-server-production'
 ])
