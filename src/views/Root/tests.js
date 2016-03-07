@@ -2,38 +2,24 @@
 import $ from 'teaspoon'
 import {assert} from 'chai'
 import React from 'react'
-import {Provider} from 'react-redux'
 // local imports
 import Root from 'views/Root'
-import {createStore} from 'store'
-
-
-// turn off redux logger
-process.env.REDUX_LOGGER = 'off'
 
 
 describe('Root', function () {
     // to be set in `beforeEach`
     let root
-    let wrapped
     let button
 
 
     beforeEach(function () {
-        const tree = $(
-            <Provider store={createStore()}>
-                <Root />
-            </Provider>
-        ).render()
-        root = tree.find(Root).only()
-        // go down two levels of wrapper components
-        wrapped = root.children().only().children().only()
+        root = $(<Root />).render()
         button = root.find('button')
     })
 
 
     it('starts out contracted', function () {
-        assert.isFalse(wrapped.props().isExpanded)
+        assert.isFalse(root.state().isExpanded)
     })
 
 
@@ -41,23 +27,23 @@ describe('Root', function () {
         // click the button
         button.trigger('click')
         // should be expanded now
-        assert.isTrue(wrapped.props().isExpanded)
+        assert.isTrue(root.state().isExpanded)
         // click the button again
         button.trigger('click')
         // should be contracted now
-        assert.isFalse(wrapped.props().isExpanded)
+        assert.isFalse(root.state().isExpanded)
         // click the button again
         button.trigger('click')
         // should be expanded now
-        assert.isTrue(wrapped.props().isExpanded)
+        assert.isTrue(root.state().isExpanded)
         // click the button again
         button.trigger('click')
         // should be contracted now
-        assert.isFalse(wrapped.props().isExpanded)
+        assert.isFalse(root.state().isExpanded)
         // click the button again
         button.trigger('click')
         // should be expanded now
-        assert.isTrue(wrapped.props().isExpanded)
+        assert.isTrue(root.state().isExpanded)
     })
 
 
@@ -87,8 +73,9 @@ describe('Root', function () {
 
         it('does not render additional text', function () {
             const more = root.find('p')[1]
+            const style = window.getComputedStyle(more)
 
-            assert.equal(more.style.opacity, '0')
+            assert.equal(style.opacity, '0')
         })
     })
 
@@ -111,8 +98,9 @@ describe('Root', function () {
 
         it('renders additional text, with proper content', function () {
             const more = root.find('p')[1]
+            const style = window.getComputedStyle(more)
 
-            assert.equal(more.style.opacity, '1')
+            assert.equal(style.opacity, '1')
             assert.equal(
                 more.innerHTML,
                 'The Mishkins are a family, but they are also more.'

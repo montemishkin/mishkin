@@ -46,6 +46,7 @@ module.exports = function (config) {
                 loaders: webpackBaseConfig.module.loaders
             },
             resolve: webpackBaseConfig.resolve,
+            plugins: webpackBaseConfig.plugins,
             devtool: 'inline-source-map',
         },
 
@@ -68,9 +69,9 @@ module.exports = function (config) {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: [
-            // 'Chrome',
+            'Chrome',
             'Firefox',
-            // 'Safari',
+            'Safari',
         ],
 
         plugins: [
