@@ -7,7 +7,6 @@
 # built files
 !build/
 # public assets
-!src/assets/
-!src/templates/
+!public/
 # nginx config
 !config/nginx

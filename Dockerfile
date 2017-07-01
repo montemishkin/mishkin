@@ -22,9 +22,9 @@ RUN \
     # install node
     && curl -sL https://deb.nodesource.com/setup_4.x | bash - \
     && apt-get install -y nodejs \
-    # clean up (to reduce image size)
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
+    # # clean up (to reduce image size)
+    # && apt-get clean \
+    # && rm -rf /var/lib/apt/lists/* \
     # upgrade npm
     && npm install -g npm \
     # install pm2

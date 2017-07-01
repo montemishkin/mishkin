@@ -12,7 +12,6 @@ var rootDir = path.join(__dirname, '..')
 var configDir = path.join(rootDir, 'config')
 var buildDir = path.join(rootDir, 'build')
 var sourceDir = path.join(rootDir, 'src')
-var publicDir = path.join(sourceDir, 'public')
 var webpackDir = path.join(configDir, 'webpack')
 // entry points
 var clientEntry = path.join(sourceDir, 'client.js')
@@ -27,7 +26,6 @@ module.exports = {
     rootDir: rootDir,
     sourceDir: sourceDir,
     buildDir: buildDir,
-    publicDir: publicDir,
     // entry points
     clientEntry: clientEntry,
     serverEntry: serverEntry,
@@ -46,6 +44,4 @@ module.exports = {
     webpackBaseConfig: path.join(webpackDir, 'base.js'),
     webpackClientConfig: path.join(webpackDir, 'client.js'),
     webpackServerConfig: path.join(webpackDir, 'server.js'),
-    // favicon
-    favicon: path.join(publicDir, 'images', 'favicon.png')
 }

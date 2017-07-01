@@ -1,12 +1,34 @@
 upstream mishkin {
-    server 127.0.0.1:8000;
+    server unix:/home/mishkin/mdv/mishkin.sock;
 }
 
 
 server {
     listen 80;
 
-    server_name mishkin.com www.mishkin.com;
+    # TODO: change this for digital ocean config
+    # server_name mishkin.com www.mishkin.com;
+    server_name _;
+
+    gzip on;
+    gzip_comp_level 6;
+    gzip_min_length 256;
+    gzip_proxied any;
+    gzip_types
+        application/javascript
+        application/json
+        image/svg+xml
+        text/css
+        text/plain
+    ;
+
+    location ~ ^/static/(.*) {
+        # TODO: change this for digital ocean config
+        # root /home/mishkin/mdv/mishkin/;
+        root /root/mishkin;
+
+        try_files /build/$1 /public/$1 =404;
+    }
 
     location / {
         proxy_pass http://mishkin/;
